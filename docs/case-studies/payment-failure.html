@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Failure Prediction | Adeshina Shittu</title>
+  <meta name="description" content="A case-study blueprint for using payment operations data to identify payouts that may warrant additional review.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Payment Failure Prediction | Adeshina Shittu">
+  <meta property="og:description" content="A proposed machine learning case study for payment operations, from dataset selection to evaluation and decision-making.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/payment-failure.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/payment-failure.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Case study blueprint</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Machine learning</p>
+      <h1>Payment failure <em>prediction.</em></h1>
+      <p class="case-lede">A proposed end-to-end machine learning case study exploring how payment operations data can support more proactive risk detection.</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>SQL</li>
+        <li>Classification</li>
+        <li>Feature engineering</li>
+        <li>Evaluation</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Design-stage concept.</strong>
+        <p>The dataset, modeling, evaluation, and source repository are planned. The chart below illustrates a concept.</p>
+      </aside>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / The problem</a></li>
+          <li><a href="#workflow">02 / Proposed approach</a></li>
+          <li><a href="#storytelling">03 / Data storytelling</a></li>
+          <li><a href="#evaluation">04 / Evaluation plan</a></li>
+          <li><a href="#next">05 / Next steps</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Case study blueprint">
+        <section id="problem" aria-labelledby="case-problem-title">
+          <h2 id="case-problem-title">01. The business problem</h2>
+          <p>Failed or delayed payouts can create support requests and operational overhead. A predictive model may help operations teams identify payouts that deserve additional attention before processing.</p>
+          <p><strong>Can historical payout characteristics help distinguish higher-risk transactions from lower-risk ones while supporting fair, interpretable decisions?</strong></p>
+          <ul class="case-questions">
+            <li>Which non-sensitive signals are available and valid at prediction time?</li>
+            <li>What do operations teams need to act on the predictions?</li>
+            <li>What is the cost of missing a failure or triggering an unnecessary review?</li>
+          </ul>
+        </section>
+
+        <section id="workflow" aria-labelledby="case-workflow-title">
+          <h2 id="case-workflow-title">02. End-to-end workflow</h2>
+          <p>The implementation would use a suitable licensed public dataset or clearly labeled synthetic data. Either option can demonstrate business-specific features while protecting confidential employer records.</p>
+          <ol class="case-steps" role="list">
+            <li>Identify a dataset</li>
+            <li>Explore and validate</li>
+            <li>Engineer features</li>
+            <li>Train and compare</li>
+            <li>Recommend actions</li>
+          </ol>
+        </section>
+
+        <section id="storytelling" aria-labelledby="case-story-title">
+          <h2 id="case-story-title">03. Data storytelling</h2>
+          <p>A completed case study would pair charts from the analyzed data with explanations of what the findings mean for operations teams.</p>
+          <figure class="case-figure">
+            <figcaption>Illustrative example · No model trained</figcaption>
+            <div class="case-chart">
+              <span class="case-chart-title" aria-hidden="true">Example ROC shape</span>
+              <span class="case-chart-y" aria-hidden="true">True positive rate</span>
+              <svg class="case-roc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" role="img" aria-labelledby="case-roc-title" aria-describedby="case-roc-desc">
+                <title id="case-roc-title">Example receiver operating characteristic curve</title>
+                <desc id="case-roc-desc">A conceptual curve rises above a dashed diagonal baseline, illustrating true positive rate plotted against false positive rate. The lines represent no measured results.</desc>
+                <path class="case-roc-axis" d="M2 2V148H398" />
+                <path class="case-roc-baseline" d="M2 148 398 2" />
+                <path class="case-roc-curve" d="M2 148C24 55 69 6 398 2" />
+              </svg>
+              <span class="case-chart-x" aria-hidden="true">False positive rate <span>→</span></span>
+            </div>
+          </figure>
+        </section>
+
+        <section id="evaluation" aria-labelledby="case-eval-title">
+          <h2 id="case-eval-title">04. Evaluation strategy</h2>
+          <p>Start with a transparent baseline and compare it with classifiers suited to the dataset. Examine class imbalance and calibration. Report precision, recall, PR-AUC, and ROC-AUC where they inform decisions. Keep training and test data separate and check for leakage.</p>
+          <p>Evaluate decision thresholds against realistic review capacity and the operational costs of false positives and false negatives.</p>
+        </section>
+
+        <section id="next" aria-labelledby="case-next-title">
+          <h2 id="case-next-title">05. What comes next</h2>
+          <p>Implement the pipeline, run reproducible experiments, generate evaluation figures, and document limitations and dataset licensing. A completed case study would also link to the project repository.</p>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
