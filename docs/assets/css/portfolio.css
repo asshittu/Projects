@@ -226,32 +226,30 @@ main:focus { outline: none; }
 .approach-steps dd { color: var(--muted); margin: 0; font-size: .78rem; }
 
 .section { padding-block: clamp(4.15rem, 9.5vw, 9.25rem); }
-.about { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2.3rem, 8vw, 7.4rem); }
-.about h2 { max-width: 12ch; margin-bottom: 2rem; }
+.about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(2.3rem, 8vw, 7.4rem); }
+.about h2 { max-width: 12ch; margin-bottom: 2rem; color: var(--ink); }
 .about-copy { color: var(--muted); }
 .about-lead { color: var(--ink); font-size: clamp(1.16rem, 1.65vw, 1.48rem); line-height: 1.5; letter-spacing: -.028em; }
 
-.about-art {
+.about-portrait {
   position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  min-height: clamp(10rem, 18vw, 17rem);
-  background: var(--pale);
+  isolation: isolate;
+  justify-self: center;
+  width: min(100%, 26rem);
+  margin: 0;
 }
 
-.about-rings, .about-rings span {
+.about-portrait::before {
+  content: "";
   position: absolute;
-  inset: 0;
-  margin: auto;
-  width: min(76%, 28rem);
-  aspect-ratio: 1;
+  z-index: -1;
+  inset: auto -1rem -1rem auto;
+  width: 40%;
+  height: 36%;
+  background: #d8e7f0;
 }
 
-.about-rings span { border: 1px solid #a6becf; border-radius: 50%; opacity: .68; width: 100%; }
-.about-rings span:nth-child(2) { width: 72%; }
-.about-rings span:nth-child(3) { width: 42%; background: #f0f5f8; }
-.about-monogram { position: relative; color: var(--accent); font: 2.4rem var(--serif); letter-spacing: -.06em; }
+.about-portrait img { width: 100%; background: var(--pale); }
 
 .text-link {
   display: inline-flex;
@@ -420,7 +418,9 @@ main:focus { outline: none; }
 .experience-list li { display: grid; grid-template-columns: 1fr 1.15fr; gap: .4rem 2.2rem; align-items: center; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
 .experience-list h3 { margin: 0; font-size: 1.13rem; letter-spacing: -.026em; }
 .experience-list p { color: var(--muted); font-size: .95rem; margin: 0; }
+.experience-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: .1rem .75rem; }
 .experience-list .employer { color: var(--accent); font-size: .85rem; font-weight: 600; }
+.experience-list .experience-dates { font-size: .81rem; }
 
 .skills { background: #e8eff3; }
 .skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 1.65rem 0 0; }
@@ -509,7 +509,8 @@ main:focus { outline: none; }
   .about, .featured-project, .contact-inner { grid-template-columns: minmax(0, 1fr); }
   .about { gap: 1.7rem; }
   .about h2 { margin-bottom: 1.2rem; }
-  .about-art { min-height: 12rem; }
+  .about-portrait { justify-self: start; }
+  .about-portrait::before { inset: auto -.5rem -.5rem auto; }
   .section-heading { margin-bottom: 1.2rem; }
   .feature-graph { height: clamp(7rem, 30vw, 13rem); }
   .contact-art { display: none; }
