@@ -375,6 +375,7 @@ main:focus { outline: none; }
 .project-card { display: flex; flex-direction: column; background: #fff; border: 1px solid #dfe6eb; padding: .8rem; }
 .project-thumb { position: relative; overflow: hidden; background: var(--pale); }
 .project-thumb img { width: 100%; aspect-ratio: 19 / 9; object-fit: cover; }
+.case-study-thumb img { object-fit: contain; padding: .35rem; background: #fff; }
 .photo-thumb img { opacity: .82; }
 
 .thumb-label {

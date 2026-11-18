@@ -1,0 +1,165 @@
+.bank-study .case-intro h1 {
+  max-width: 16ch;
+}
+
+.bank-hero-links {
+  margin-top: 1.5rem;
+}
+
+.bank-study .case-article a {
+  color: #2d5b81;
+  text-underline-offset: .2em;
+}
+
+.bank-study .case-article code {
+  font-size: .94em;
+}
+
+.bank-subheading {
+  margin: 1.65rem 0 .55rem;
+  color: var(--case-ink);
+  font-size: clamp(1.12rem, 1.5vw, 1.3rem);
+  line-height: 1.35;
+}
+
+.bank-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: .65rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.bank-metrics > div {
+  display: grid;
+  align-content: start;
+  gap: .3rem;
+  padding: .85rem 1rem;
+  border: 1px solid var(--case-line);
+  background: #edf2f5;
+}
+
+.bank-metrics dt {
+  color: #3e566b;
+  font-size: .8rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.bank-metrics dd {
+  margin: 0;
+  color: var(--case-ink);
+  font: 400 clamp(1.65rem, 3vw, 2.25rem)/1.15 var(--serif);
+  letter-spacing: -.045em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.bank-table-scroll {
+  max-width: 100%;
+  margin: .8rem 0 1.2rem;
+  overflow-x: auto;
+  border: 1px solid var(--case-line);
+  background: #fff;
+}
+
+.bank-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--case-ink);
+  font-size: .88rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+
+.bank-table caption {
+  padding: .8rem .85rem;
+  color: var(--case-muted);
+  font-size: .84rem;
+  text-align: left;
+}
+
+.bank-table th,
+.bank-table td {
+  padding: .55rem .75rem;
+  border-top: 1px solid var(--case-line);
+  white-space: nowrap;
+  text-align: right;
+}
+
+.bank-table th:first-child {
+  text-align: left;
+}
+
+.bank-table thead {
+  background: var(--case-panel);
+}
+
+.bank-table .bank-selected-model {
+  background: #f0f5f8;
+  font-weight: 650;
+}
+
+.bank-figure {
+  margin: 1.6rem 0 1.2rem;
+  overflow: hidden;
+  border: 1px solid var(--case-line);
+  border-radius: .2rem;
+  background: #fff;
+}
+
+.bank-figure img {
+  width: 100%;
+  height: auto;
+}
+
+.bank-figure figcaption {
+  padding: .75rem 1rem;
+  border-top: 1px solid var(--case-line);
+  background: #edf2f5;
+  color: #3e566b;
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+.bank-credit {
+  font-size: .86rem;
+}
+
+.bank-callout {
+  padding: .9rem 1rem;
+  border-left: 3px solid var(--case-accent);
+  background: #edf2f5;
+  color: #294c68;
+}
+
+.bank-command {
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: .9rem 1rem;
+  border: 1px solid var(--case-line);
+  background: #edf2f5;
+  color: var(--case-ink);
+  font-size: .88rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.bank-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.35rem;
+  padding: 0;
+  list-style: none;
+  font-size: .87rem;
+  font-weight: 650;
+}
+
+@media (max-width: 31rem) {
+  .bank-study .case-intro h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .bank-metrics > div {
+    padding: .75rem .8rem;
+  }
+}
