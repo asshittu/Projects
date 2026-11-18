@@ -1,0 +1,123 @@
+{
+  "blank_counts": {
+    "age": 0,
+    "balance": 0,
+    "campaign": 0,
+    "contact": 0,
+    "day": 0,
+    "default": 0,
+    "duration": 0,
+    "education": 0,
+    "housing": 0,
+    "job": 0,
+    "loan": 0,
+    "marital": 0,
+    "month": 0,
+    "pdays": 0,
+    "poutcome": 0,
+    "previous": 0,
+    "y": 0
+  },
+  "columns": 17,
+  "exact_duplicate_rows": 0,
+  "multiple_current_campaign_contact_rows": 27667,
+  "negative_balance_rows": 3766,
+  "no_previous_contact_rows": 36954,
+  "repeated_feature_profiles_after_first_row": 8581,
+  "rows": 45211,
+  "splits": {
+    "test": {
+      "n": 9043,
+      "positives": 2856,
+      "prevalence": 0.31582439455932765,
+      "start": 36168,
+      "stop": 45211
+    },
+    "train": {
+      "n": 27126,
+      "positives": 1367,
+      "prevalence": 0.05039445550394456,
+      "start": 0,
+      "stop": 27126
+    },
+    "validation": {
+      "n": 9042,
+      "positives": 1066,
+      "prevalence": 0.11789427117894272,
+      "start": 27126,
+      "stop": 36168
+    }
+  },
+  "subscription_rate": 0.11698480458295547,
+  "subscriptions": 5289,
+  "train_numeric_summary": {
+    "balance": {
+      "25%": 36.0,
+      "50%": 378.0,
+      "75%": 1331.0,
+      "count": 27126.0,
+      "max": 98417.0,
+      "mean": 1281.081361,
+      "min": -8019.0,
+      "std": 2955.87533
+    },
+    "contacted_before": {
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "count": 27126.0,
+      "max": 1.0,
+      "mean": 0.028275,
+      "min": 0.0,
+      "std": 0.165762
+    },
+    "previous": {
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "count": 27126.0,
+      "max": 37.0,
+      "mean": 0.080329,
+      "min": 0.0,
+      "std": 0.699597
+    },
+    "prior_days": {
+      "25%": 120.0,
+      "50%": 164.0,
+      "75%": 181.0,
+      "count": 767.0,
+      "max": 198.0,
+      "mean": 150.491525,
+      "min": 5.0,
+      "std": 35.52897
+    }
+  },
+  "train_previous_outcome_summary": {
+    "failure": {
+      "calls": 577,
+      "subscription_rate": 0.034662,
+      "subscriptions": 20
+    },
+    "other": {
+      "calls": 152,
+      "subscription_rate": 0.085526,
+      "subscriptions": 13
+    },
+    "success": {
+      "calls": 38,
+      "subscription_rate": 0.131579,
+      "subscriptions": 5
+    },
+    "unknown": {
+      "calls": 26359,
+      "subscription_rate": 0.050419,
+      "subscriptions": 1329
+    }
+  },
+  "unknown_counts": {
+    "contact": 13020,
+    "education": 1857,
+    "job": 288,
+    "poutcome": 36959
+  }
+}
