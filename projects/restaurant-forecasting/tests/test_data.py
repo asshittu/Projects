@@ -8,7 +8,6 @@ from unittest.mock import patch
 from zipfile import ZIP_DEFLATED, ZipFile
 
 import pandas as pd
-
 from src.data import find_competition_directory, load_competition_data
 
 SYNTHETIC_INPUTS = {
