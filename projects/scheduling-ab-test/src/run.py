@@ -6,7 +6,13 @@ from pathlib import Path
 
 from .analysis import analyze_trial
 from .figures import write_figures
-from .simulation import ASSIGNMENT_PROBABILITY, DEFAULT_SEED, DEFAULT_WORKSPACES, PLANTED_RATES, generate_trial
+from .simulation import (
+    ASSIGNMENT_PROBABILITY,
+    DEFAULT_SEED,
+    DEFAULT_WORKSPACES,
+    PLANTED_RATES,
+    generate_trial,
+)
 
 
 def main() -> None:
