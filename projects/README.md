@@ -10,4 +10,10 @@
 | 06. Restaurant Review Sentiment Classification | Complete | [Restaurant Sentiment](restaurant-sentiment/) |
 | 07. Restaurant Visitor Forecasting | Complete | [Restaurant Forecasting](restaurant-forecasting/) |
 
+## Additional portfolio studies
+
+| Project | Method | Source and reports |
+| --- | --- | --- |
+| Scheduling A/B Test | Completed simulation | [Scheduling A/B Test](scheduling-ab-test/) |
+
 The completed cases are served by GitHub Pages under `/Projects/`. Each case links to its reproducible source, measured outputs, and data attribution. [Live portfolio](https://asshittu.github.io/Projects/#projects)

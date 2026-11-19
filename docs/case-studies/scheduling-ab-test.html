@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scheduling A/B Test Simulation | Adeshina Shittu</title>
+  <meta name="description" content="A reproducible simulation of a workspace-randomized scheduling A/B test with seven-day publishing outcomes and a support-request guardrail.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scheduling A/B Test Simulation | Adeshina Shittu">
+  <meta property="og:description" content="A synthetic product experiment evaluating a guided scheduling flow on first publish and support requests.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/scheduling-ab-test.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/scheduling-ab-test.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Scheduling A/B Test</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Product experimentation</p>
+      <h1>Scheduling <em>A/B test.</em></h1>
+      <p class="case-lede">How would a product team test whether guided publishing helps more managers publish a first schedule within seven days?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>Experiment design</li>
+        <li>Intent-to-treat</li>
+        <li>Guardrail metrics</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Simulated study</strong>
+        <p>All workspaces and outcomes are synthetic. The generator defines the effects used to demonstrate the analysis.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore simulated results</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/70ef404424c1c020c60661bbc9f085d8cf31cf4c/projects/scheduling-ab-test">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Product question</a></li>
+          <li><a href="#data">02 / Simulation and assignment</a></li>
+          <li><a href="#workflow">03 / Analysis workflow</a></li>
+          <li><a href="#results">04 / Simulated results</a></li>
+          <li><a href="#limits">05 / Interpretation</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Scheduling A/B test case study">
+        <section id="problem" aria-labelledby="scheduling-problem-title">
+          <h2 id="scheduling-problem-title">01. The product question</h2>
+          <p>Publishing a first schedule is an early milestone for a workspace setting up shift scheduling. This exercise compares a standard editor with a guided publishing flow that walks a manager through the steps to publish.</p>
+          <p>The primary outcome is whether a workspace publishes a first schedule within seven days of assignment. The guardrail is whether a workspace makes any support request during the same window. The illustrative decision criteria require at least a two percentage-point increase in publishing and allow up to a one percentage-point increase in support requests.</p>
+        </section>
+
+        <section id="data" aria-labelledby="scheduling-data-title">
+          <h2 id="scheduling-data-title">02. Simulation and assignment</h2>
+          <p>The generator creates 12,000 fictitious workspaces with complete seven-day outcomes. Each workspace is independently assigned to the standard or guided flow with equal probability. Randomization happens at the workspace level so that managers sharing one schedule would receive the same flow in a live trial.</p>
+          <dl class="bank-metrics" aria-label="Simulated assignment counts">
+            <div><dt>Assigned workspaces</dt><dd>12,000</dd></div>
+            <div><dt>Standard editor</dt><dd>6,028</dd></div>
+            <div><dt>Guided publishing</dt><dd>5,972</dd></div>
+          </dl>
+          <p>The expected count is 6,000 per arm. A Pearson chi-squared check for a sample ratio mismatch gives χ² = 0.261 and p = 0.609 with one degree of freedom. The p-value is above the 0.01 flagging threshold.</p>
+          <p>The seed is 42. The generator sets publishing probabilities to 55% for the standard editor and 60% for guided publishing. It sets support-request probabilities to 3.0% and 3.2%, respectively. These rates are inputs to the simulation.</p>
+        </section>
+
+        <section id="workflow" aria-labelledby="scheduling-workflow-title">
+          <h2 id="scheduling-workflow-title">03. Analysis workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Generate workspaces</li>
+            <li>Audit assignment</li>
+            <li>Measure outcomes</li>
+            <li>Estimate uncertainty</li>
+            <li>Check both thresholds</li>
+          </ol>
+          <h3 class="bank-subheading">Keep the assigned denominators</h3>
+          <p>Intent-to-treat measures each outcome in the workspace’s assigned arm. Workspaces without a publish event or support request still count in the denominator. A workspace can contribute to both outcomes.</p>
+          <h3 class="bank-subheading">Estimate the guided-minus-standard difference</h3>
+          <p>Report Wilson 95% confidence intervals for arm rates and a Newcombe 95% interval for each absolute difference. Compare the publishing interval’s lower bound with the +2 percentage-point minimum and the support interval’s upper bound with the +1 percentage-point tolerance.</p>
+        </section>
+
+        <section id="results" aria-labelledby="scheduling-results-title">
+          <h2 id="scheduling-results-title">04. Simulated results</h2>
+          <p class="bank-callout">The seed-42 run estimated a 4.78 percentage-point increase in first publish (95% CI 3.01 to 6.54 pp). The support-request difference was −0.27 percentage points (95% CI −0.89 to 0.35 pp).</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="scheduling-rates-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="scheduling-rates-caption">Seven-day outcomes among all assigned synthetic workspaces. Values are rounded for display.</caption>
+              <thead>
+                <tr><th scope="col">Outcome</th><th scope="col">Arm</th><th scope="col">Events</th><th scope="col">Rate</th><th scope="col">Wilson 95% CI</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">First publish</th><td>Standard</td><td>3,372</td><td>55.94%</td><td>54.68% to 57.19%</td></tr>
+                <tr><th scope="row">First publish</th><td>Guided</td><td>3,626</td><td>60.72%</td><td>59.47% to 61.95%</td></tr>
+                <tr><th scope="row">Support request</th><td>Standard</td><td>194</td><td>3.22%</td><td>2.80% to 3.69%</td></tr>
+                <tr><th scope="row">Support request</th><td>Guided</td><td>176</td><td>2.95%</td><td>2.55% to 3.41%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The publishing difference is 8.54% relative to the standard editor rate. The two-sided test of equal publishing rates gives z = 5.308 and p = 1.11e-07.</p>
+          <figure class="bank-figure">
+            <img src="../assets/portfolio/scheduling-ab-test/publish-rate.webp" width="1098" height="513" alt="Simulated first-publish rates of 55.9% for the standard editor and 60.7% for guided publishing, with Wilson 95% confidence intervals." loading="lazy" decoding="async">
+            <figcaption>Each first-publish rate includes every workspace assigned to its arm.</figcaption>
+          </figure>
+          <figure class="bank-figure">
+            <img src="../assets/portfolio/scheduling-ab-test/support-guardrail.webp" width="1098" height="513" alt="The simulated support-request difference of minus 0.27 percentage points and its 95% confidence interval fall below the plus one percentage-point tolerance." loading="lazy" decoding="async">
+            <figcaption>The guardrail compares the upper confidence bound with the maximum allowed increase in support requests.</figcaption>
+          </figure>
+          <p>The publishing interval clears the +2 percentage-point minimum, and the support interval stays below the +1 percentage-point tolerance. The generator’s +0.20 percentage-point support difference lies within the simulated interval.</p>
+        </section>
+
+        <section id="limits" aria-labelledby="scheduling-limits-title">
+          <h2 id="scheduling-limits-title">05. Interpretation and limits</h2>
+          <p>The simulation shows how the decision rule behaves when the assignment process and outcome probabilities are known. The observed rates vary around the inputs through simulated sampling. These results describe the exercise and cannot estimate the impact of a real product change.</p>
+          <p>A live test would need an eligibility rule, separate assignment and exposure logs, a full seven-day window for each workspace, and a sample-size calculation based on product traffic. Audit event completeness before treating an absent event as a zero.</p>
+          <p>Workspace assignment reduces contamination between managers sharing a schedule. A live design should also consider interactions across locations, spillovers from shared support staff, and how novelty could affect the outcome.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="scheduling-reproduce-title">
+          <h2 id="scheduling-reproduce-title">06. Reproduce the study</h2>
+          <p>Run the seeded generator locally to recreate the synthetic trial and export aggregate statistics and charts. The project includes its assumptions, dependency versions, and tests.</p>
+          <pre class="bank-command"><code>cd projects/scheduling-ab-test
+python -m pip install -r requirements.txt
+python -m src.run
+python -m unittest discover -s tests</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/70ef404424c1c020c60661bbc9f085d8cf31cf4c/projects/scheduling-ab-test">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/70ef404424c1c020c60661bbc9f085d8cf31cf4c/projects/scheduling-ab-test/DATASET.md">Simulation and data dictionary</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/70ef404424c1c020c60661bbc9f085d8cf31cf4c/projects/scheduling-ab-test/reports/metrics.json">Machine-readable simulated results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
