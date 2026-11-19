@@ -15,5 +15,6 @@
 | Project | Method | Source and reports |
 | --- | --- | --- |
 | Scheduling A/B Test | Completed simulation | [Scheduling A/B Test](scheduling-ab-test/) |
+| Marketing Attribution | Completed historical analysis | [Marketing Attribution](marketing-attribution/) |
 
 The completed cases are served by GitHub Pages under `/Projects/`. Each case links to its reproducible source, measured outputs, and data attribution. [Live portfolio](https://asshittu.github.io/Projects/#projects)

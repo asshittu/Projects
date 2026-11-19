@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketing Attribution | Adeshina Shittu</title>
+  <meta name="description" content="How do first-touch, last-touch, and linear rules change conversion credit across display ad campaigns?">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Marketing Attribution | Adeshina Shittu">
+  <meta property="og:description" content="How do first-touch, last-touch, and linear rules change conversion credit across display ad campaigns?">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/marketing-attribution.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/marketing-attribution.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Marketing Attribution</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Marketing analytics</p>
+      <h1>Marketing <em>attribution.</em></h1>
+      <p class="case-lede">How do first-touch, last-touch, and linear rules change conversion credit across display ad campaigns?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>DuckDB</li>
+        <li>SQL</li>
+        <li>Python</li>
+        <li>Display advertising</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed historical study</strong>
+        <p>Measured attribution-rule comparison using Criteo’s observed display impressions.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore results</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/d06910c763afe3e8465cb08b1672b176dc01337a/projects/marketing-attribution">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / The reporting question</a></li>
+          <li><a href="#data">02 / Dataset and eligibility</a></li>
+          <li><a href="#workflow">03 / Build and compare paths</a></li>
+          <li><a href="#results">04 / Where credit shifts</a></li>
+          <li><a href="#decision">05 / How to use the comparison</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Marketing Attribution case study">
+        <section id="problem" aria-labelledby="marketing-attribution-problem-title">
+          <h2 id="marketing-attribution-problem-title">01. The reporting question</h2>
+          <p>When several display impressions precede a conversion, an attribution report needs a rule for deciding how much credit each campaign receives. This study asks how much a campaign ranking depends on the choice of rule and on which impressions count as part of the path.</p>
+          <p>The comparison uses first touch, last touch, and linear credit. The first two methods assign credit to the earliest or latest observed impression. Linear credit divides one conversion equally across its qualifying impressions. Exact time ties split the first- or last-touch credit evenly.</p>
+        </section>
+
+        <section id="data" aria-labelledby="marketing-attribution-data-title">
+          <h2 id="marketing-attribution-data-title">02. Dataset and eligibility</h2>
+          <p>Criteo AI Lab released an anonymized, subsampled extract of live display ad impressions. The pinned release contains 16,468,027 impressions across 675 campaign IDs. All campaigns in this study are observed in Criteo display data.</p>
+          <dl class="bank-metrics" aria-label="Criteo source summary">
+            <div><dt>Impressions scanned</dt><dd>16,468,027</dd></div>
+            <div><dt>Reported conversion IDs</dt><dd>435,810</dd></div>
+            <div><dt>Lookback per conversion</dt><dd>7 days</dd></div>
+          </dl>
+          <p>Of the reported IDs, 2,910 mapped to multiple users or conversion times. The analysis excludes them and requires both the conversion and its seven-day lookback to fit inside the observed impression period. This excludes 64,508 early IDs and 86,220 late IDs. Of the remaining 282,172 IDs, 40,722 lack a qualifying source-linked impression.</p>
+          <p class="bank-credit">Criteo AI Lab (2017), Attribution Modeling for Bidding Dataset. The Criteo-derived metrics and figures on this page are shared under CC BY-NC-SA 4.0. <a href="https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/">Source and terms</a> · <a href="https://arxiv.org/abs/1707.06409">Companion paper</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="marketing-attribution-workflow-title">
+          <h2 id="marketing-attribution-workflow-title">03. Build and compare paths</h2>
+          <ol class="case-steps" role="list">
+            <li>Verify source</li>
+            <li>Check conversion IDs</li>
+            <li>Build pre-conversion paths</li>
+            <li>Apply credit rules</li>
+            <li>Compare rankings</li>
+          </ol>
+          <h3 class="bank-subheading">Source-linked paths</h3>
+          <p>The primary analysis uses impressions tagged with the same conversion ID. An impression must occur strictly before the conversion and within seven days of it. Each eligible conversion contributes one unit of credit per model.</p>
+          <h3 class="bank-subheading">Same-user sensitivity</h3>
+          <p>For the same starting cohort of conversions, consider any observed impression for the same anonymized user during the seven days before conversion. An impression must also occur after the user’s previous coherent conversion where one exists. This removes 411 anchors with no remaining impression. The 94 anchors sharing a conversion time with another ID for the same user can share eligible impressions.</p>
+          <p>The rule compares plausible ways to construct observed paths. A nearby ad for the same user can come from a different advertiser or have no relationship to the purchase.</p>
+        </section>
+
+        <section id="results" aria-labelledby="marketing-attribution-results-title">
+          <h2 id="marketing-attribution-results-title">04. Where credit shifts</h2>
+          <p class="bank-callout">All three rules give each campaign the same credit in the 241,450 source-linked paths. In the same-user sensitivity, 41,337 of 241,039 paths (17.15%) contain multiple campaigns, and the top campaign changes between first and last touch.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="attribution-path-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="attribution-path-caption">Every method assigns one credit per qualifying conversion. A conversion can have several impressions of one campaign.</caption>
+              <thead><tr><th scope="col">Path scope</th><th scope="col">Conversions</th><th scope="col">Impressions</th><th scope="col">Multi-campaign paths</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Source-linked</th><td>241,450</td><td>381,898</td><td>0</td></tr>
+                <tr><th scope="row">Same-user sensitivity</th><td>241,039</td><td>623,011</td><td>41,337</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/marketing-attribution/campaign-credit.svg" alt="First-touch, last-touch, and linear credits match across the leading campaigns in conversion-linked Criteo paths." loading="lazy" decoding="async">
+            <figcaption>Each source-linked path contains impressions from one campaign, so all three rules assign that campaign the full credit.</figcaption>
+          </figure>
+          <figure class="bank-figure">
+            <img src="../assets/marketing-attribution/campaign-credit-same-user.svg" alt="In same-user paths, campaign 10341182 leads by first touch and campaign 9100693 leads by last touch and linear credit." loading="lazy" decoding="async">
+            <figcaption>Including nearby same-user impressions changes rankings. The chart shows the seven campaigns with the most linear credit in this comparison.</figcaption>
+          </figure>
+          <div class="bank-table-scroll" role="region" aria-labelledby="attribution-credit-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="attribution-credit-caption">Same-user credit for the five leading campaigns by linear credit, rounded to one decimal.</caption>
+              <thead><tr><th scope="col">Campaign</th><th scope="col">First touch</th><th scope="col">Last touch</th><th scope="col">Linear</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">#9100693</th><td>11,392.0</td><td>12,284.0</td><td>11,761.0</td></tr>
+                <tr><th scope="row">#10341182</th><td>11,420.5</td><td>11,480.5</td><td>11,451.2</td></tr>
+                <tr><th scope="row">#15184511</th><td>11,286.0</td><td>11,460.5</td><td>11,364.3</td></tr>
+                <tr><th scope="row">#32368244</th><td>10,973.0</td><td>11,497.0</td><td>11,163.7</td></tr>
+                <tr><th scope="row">#2869134</th><td>5,815.0</td><td>6,790.0</td><td>6,173.9</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Campaign #2869134 gains 975 credits from first touch to last touch, the largest absolute difference between those two rules in the sensitivity analysis.</p>
+        </section>
+
+        <section id="decision" aria-labelledby="marketing-attribution-decision-title">
+          <h2 id="marketing-attribution-decision-title">05. How to use the comparison</h2>
+          <p>Keep the path definition, lookback, and credit rule visible in campaign reporting. If the ranking changes with those choices, review the campaigns’ observed touch timing and check whether identity and event collection cover the channels or campaigns the decision depends on.</p>
+          <p>This dataset describes a subsampled display ad system with anonymized campaign IDs and transformed costs. The comparison measures how rules assign credit within the available data. Estimating incremental conversion lift or the effect of a budget change requires an experiment or another credible source of counterfactual evidence.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="marketing-attribution-reproduce-title">
+          <h2 id="marketing-attribution-reproduce-title">06. Reproduce the study</h2>
+          <p>The Python entry point downloads and verifies the pinned source release, runs the DuckDB SQL, and exports aggregate tables and figures. The gzip download is about 623 MiB. The included fixture tests require no live download.</p>
+          <pre class="bank-command"><code>cd projects/marketing-attribution
+python -m pip install -r requirements.txt
+python -m src.run
+python -m unittest discover -s tests</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/d06910c763afe3e8465cb08b1672b176dc01337a/projects/marketing-attribution">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/d06910c763afe3e8465cb08b1672b176dc01337a/projects/marketing-attribution/sql/attribution.sql">Attribution SQL</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/d06910c763afe3e8465cb08b1672b176dc01337a/projects/marketing-attribution/DATASET.md">Data dictionary and usage terms</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/d06910c763afe3e8465cb08b1672b176dc01337a/projects/marketing-attribution/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
