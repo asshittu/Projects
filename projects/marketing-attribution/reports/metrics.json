@@ -1,0 +1,62 @@
+{
+  "campaigns_receiving_credit": 675,
+  "credit_totals": {
+    "first_touch": 241450.0,
+    "last_touch": 241450.0,
+    "linear_touch": 241450.0
+  },
+  "lookback_days": 7,
+  "paths": {
+    "ambiguous_conversion_ids": 2910,
+    "beyond_observation_ids": 86220,
+    "insufficient_prehistory_ids": 64508,
+    "multi_campaign_conversions": 0,
+    "multi_touch_conversions": 65145,
+    "no_touch_in_lookback_ids": 40722,
+    "qualified_conversions": 241450,
+    "qualified_impressions": 381898,
+    "reported_conversion_ids": 435810,
+    "timestamp_tie_conversions": 0,
+    "within_observation_ids": 282172
+  },
+  "provenance": {
+    "analyzed_on": "2026-11-19",
+    "dataset_url": "https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/",
+    "download_url": "https://huggingface.co/datasets/criteo/criteo-attribution-dataset/resolve/904188a63cbad78bee43cd26ff5ee4ac77903986/criteo_attribution_dataset.tsv.gz",
+    "gzip_sha256": "94ac7a465564349bc7ba008602211d5990a3c53cc133abc0aadef61ea2391a98",
+    "source_license": "CC BY-NC-SA 4.0",
+    "source_license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "source_revision": "904188a63cbad78bee43cd26ff5ee4ac77903986"
+  },
+  "same_user_sensitivity": {
+    "campaigns_receiving_credit": 675,
+    "credit_totals": {
+      "first_touch": 241039.0,
+      "last_touch": 241039.0,
+      "linear_touch": 241039.0
+    },
+    "paths": {
+      "anchors_without_eligible_touches": 411,
+      "multi_campaign_conversions": 41337,
+      "multi_touch_conversions": 131275,
+      "qualified_conversions": 241039,
+      "qualified_impressions": 623011,
+      "simultaneous_conversion_ids": 94,
+      "source_linked_anchors": 241450,
+      "timestamp_tie_conversions": 246
+    }
+  },
+  "source": {
+    "at_or_after_conversion_impressions": 0,
+    "campaigns": 675,
+    "first_conversion_second": 41,
+    "first_impression_second": 0,
+    "impressions": 16468027,
+    "invalid_rows": 0,
+    "last_conversion_second": 5262888,
+    "last_impression_second": 2671199,
+    "linked_impressions": 806196,
+    "users": 6142256
+  },
+  "study_scope": "Observed Criteo display campaign impressions"
+}
