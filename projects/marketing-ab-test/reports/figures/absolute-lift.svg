@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="385.2pt" height="216pt" viewBox="0 0 385.2 216" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Absolute lift with Newcombe 95% interval</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Absolute lift with Newcombe 95% interval</dc:title>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 216
+L 385.2 216
+L 385.2 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 93.015865 155.162934
+L 367.788954 155.162934
+L 367.788954 3.00024
+L 93.015865 3.00024
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 118.379535 155.162934
+L 118.379535 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="118.379535" y="171.281059" transform="rotate(-0 118.379535 171.281059)">0.00</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 174.833398 155.162934
+L 174.833398 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="174.833398" y="171.281059" transform="rotate(-0 174.833398 171.281059)">0.25</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 231.287261 155.162934
+L 231.287261 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="231.287261" y="171.281059" transform="rotate(-0 231.287261 171.281059)">0.50</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 287.741124 155.162934
+L 287.741124 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="287.741124" y="171.281059" transform="rotate(-0 287.741124 171.281059)">0.75</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 344.194987 155.162934
+L 344.194987 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="344.194987" y="171.281059" transform="rotate(-0 344.194987 171.281059)">1.00</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #162a41" x="230.402409" y="186.894809" transform="rotate(-0 230.402409 186.894809)">Absolute lift (percentage points)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11"/>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #475c70" x="86.015865" y="84.97541" transform="rotate(-0 86.015865 84.97541)">Ad minus PSA</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_12">
+    <path d="M 118.379535 155.162934
+L 118.379535 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke-dasharray: 1.35,2.2275; stroke-dashoffset: 0; stroke: #475c70; stroke-width: 1.35"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 231.287261 155.162934
+L 231.287261 3.00024
+" clip-path="url(#p512652c521)" style="fill: none; stroke-dasharray: 4.995,2.16; stroke-dashoffset: 0; stroke: #176e6c; stroke-width: 1.35"/>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 251.010487 80.416348
+L 329.743449 80.416348
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #236492; stroke-width: 2.2"/>
+   </g>
+   <g id="LineCollection_2">
+    <path d="M 251.010487 93.763952
+L 251.010487 67.068743
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #236492; stroke-width: 1.6"/>
+    <path d="M 329.743449 93.763952
+L 329.743449 67.068743
+" clip-path="url(#p512652c521)" style="fill: none; stroke: #236492; stroke-width: 1.6"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 93.015865 155.162934
+L 367.788954 155.162934
+" style="fill: none; stroke: #e1e8ed; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m2d8ea2130f" d="M 0 3.278719
+C 0.869527 3.278719 1.703557 2.933253 2.318405 2.318405
+C 2.933253 1.703557 3.278719 0.869527 3.278719 0
+C 3.278719 -0.869527 2.933253 -1.703557 2.318405 -2.318405
+C 1.703557 -2.933253 0.869527 -3.278719 0 -3.278719
+C -0.869527 -3.278719 -1.703557 -2.933253 -2.318405 -2.318405
+C -2.933253 -1.703557 -3.278719 -0.869527 -3.278719 0
+C -3.278719 0.869527 -2.933253 1.703557 -2.318405 2.318405
+C -1.703557 2.933253 -0.869527 3.278719 0 3.278719
+z
+" style="stroke: #ffffff; stroke-width: 0.65"/>
+    </defs>
+    <g clip-path="url(#p512652c521)">
+     <use xlink:href="#m2d8ea2130f" x="292.087015" y="80.416348" style="fill: #236492; stroke: #ffffff; stroke-width: 0.65"/>
+    </g>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #162a41" x="292.087015" y="67.416348" transform="rotate(-0 292.087015 67.416348)">+0.77 pp</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #475c70" x="292.087015" y="105.014785" transform="rotate(-0 292.087015 105.014785)">Newcombe 95% interval</text>
+   </g>
+   <g id="legend_1">
+    <g id="line2d_14">
+     <path d="M 78.845573 203.913713
+L 89.345573 203.913713
+L 99.845573 203.913713
+" style="fill: none; stroke-dasharray: 1.35,2.2275; stroke-dashoffset: 0; stroke: #475c70; stroke-width: 1.35"/>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #162a41" x="108.245573" y="207.588713" transform="rotate(-0 108.245573 207.588713)">No difference</text>
+    </g>
+    <g id="line2d_15">
+     <path d="M 199.728464 203.913713
+L 210.228464 203.913713
+L 220.728464 203.913713
+" style="fill: none; stroke-dasharray: 4.995,2.16; stroke-dashoffset: 0; stroke: #176e6c; stroke-width: 1.35"/>
+    </g>
+    <g id="text_11">
+     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #162a41" x="229.128464" y="207.588713" transform="rotate(-0 229.128464 207.588713)">Illustrative hurdle (+0.50 pp)</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p512652c521">
+   <rect x="93.015865" y="3.00024" width="274.773089" height="152.162694"/>
+  </clipPath>
+ </defs>
+</svg>

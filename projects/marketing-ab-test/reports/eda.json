@@ -1,0 +1,32 @@
+{
+  "blank_counts": {
+    "converted": 0,
+    "most_ads_day": 0,
+    "most_ads_hour": 0,
+    "source_row": 0,
+    "test_group": 0,
+    "total_ads": 0,
+    "user_id": 0
+  },
+  "columns": 7,
+  "exact_duplicate_rows_after_first": 0,
+  "exposure_summary_role": "Descriptive only. Exposure count follows group assignment.",
+  "observed_exposure_count_summary": {
+    "ad": {
+      "max": 2065,
+      "mean": 24.823365,
+      "median": 13.0,
+      "min": 1
+    },
+    "psa": {
+      "max": 907,
+      "mean": 24.761138,
+      "median": 12.0,
+      "min": 1
+    }
+  },
+  "rows": 588101,
+  "unique_source_rows": 588101,
+  "unique_user_ids": 588101,
+  "zero_exposure_rows": 0
+}
