@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telecom Customer Churn &amp; Retention Modeling | Adeshina Shittu</title>
+  <meta name="description" content="A reproducible telecom retention case study with leakage-aware predictors, grouped evaluation, and capacity-based targeting on the public UCI Iranian Churn dataset.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Telecom Customer Churn &amp; Retention Modeling | Adeshina Shittu">
+  <meta property="og:description" content="An independent public-data case study on ranking telecom churn risk before a retention outreach window.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/telecom-churn.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/telecom-churn.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Telecom churn</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Machine learning</p>
+      <h1>Telecom churn <em>&amp; retention modeling.</em></h1>
+      <p class="case-lede">Can nine months of telecom usage and service history help a retention team prioritize customers for outreach during a three-month planning window?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>scikit-learn</li>
+        <li>Binary classification</li>
+        <li>Grouped validation</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed study</strong>
+        <p>A reproducible telecom analysis with measured grouped holdout results.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore evaluation</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/5699b4b9ddf6032aa8028e0be4e6bc7ba0d2b121/projects/telecom-churn">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Business question</a></li>
+          <li><a href="#data">02 / Data and grouped split</a></li>
+          <li><a href="#workflow">03 / Modeling workflow</a></li>
+          <li><a href="#results">04 / Holdout evaluation</a></li>
+          <li><a href="#recommendations">05 / Recommendations</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Telecom customer churn and retention case study">
+        <section id="problem" aria-labelledby="telecom-problem-title">
+          <h2 id="telecom-problem-title">01. The business question</h2>
+          <p>A retention team with a fixed outreach budget needs to choose which eligible subscribers to review first. The score ranks the risk of churn by the end of month 12 using signals aggregated during months 1–9. Months 10–12 are the planning window.</p>
+          <p>I use average precision to compare rankings when churn is uncommon. At a given outreach capacity, precision tells the team what share of flagged records actually churned, and recall tells it what share of all observed churners the list captured.</p>
+        </section>
+
+        <section id="data" aria-labelledby="telecom-data-title">
+          <h2 id="telecom-data-title">02. Data and grouped split</h2>
+          <p>The public CSV contains 3,150 customer records from one Iranian telecom provider. Of those records, 495 are labeled as churn, a rate of 15.71%. The released file contains 14 columns, zero blank cells, and 300 rows that repeat an earlier complete record.</p>
+          <p>The file contains neither a usable customer ID nor per-record calendar dates. I kept the repeated records because identical values may describe different customers. I grouped rows by their exact nine-feature signature before splitting so no identical input profile crosses partitions. This also keeps exact duplicate records together.</p>
+          <p>Five stratified group folds approximate a 60% training, 20% validation, and 20% holdout split. Folds 2–4 train the models, fold 1 selects the model and cutoff, and fold 0 measures performance. These partitions test unseen input profiles within the released sample.</p>
+          <figure class="bank-figure">
+            <img src="../assets/telecom-churn/split-prevalence.svg" alt="Bar chart comparing churn prevalence across the grouped training, validation, and holdout partitions." loading="lazy" decoding="async">
+            <figcaption>The grouped split contained 1,892 training, 627 validation, and 631 holdout rows. Churn prevalence was between 15.63% and 15.75% across partitions.</figcaption>
+          </figure>
+          <p class="bank-credit">Iranian Churn (2020), UCI Machine Learning Repository. Accessed November 18, 2026. <a href="https://archive.ics.uci.edu/dataset/563/iranian+churn+dataset">UCI Iranian Churn</a> · <a href="https://doi.org/10.24432/C5JW3Z">DOI 10.24432/C5JW3Z</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="telecom-workflow-title">
+          <h2 id="telecom-workflow-title">03. Modeling workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Validate fields</li>
+            <li>Audit availability</li>
+            <li>Group and split</li>
+            <li>Train and compare</li>
+            <li>Evaluate outreach</li>
+          </ol>
+          <h3 class="bank-subheading">Feature availability</h3>
+          <p>The nine retained inputs cover call failures, whether a complaint was recorded, subscription length, charge band, call duration in aggregate, call and SMS frequency, distinct called numbers, and tariff plan. I excluded <code>Status</code> because inactive status is too close to the churn outcome, <code>Customer Value</code> because its construction is undocumented, and both age fields. I derived average voice-call seconds for records with calls and a zero-call indicator. The training pipeline imputes undefined averages for records with no voice calls.</p>
+          <p>UCI describes the complaint field as part of the nine-month feature window. The release provides no event dates to establish whether complaints included requests to cancel. That uncertainty matters before using the field to inform outreach.</p>
+          <figure class="bank-figure">
+            <img src="../assets/telecom-churn/complaint-churn.svg" alt="Training records grouped by whether there was a recorded complaint, with observed churn rates and group sizes." loading="lazy" decoding="async">
+            <figcaption>In training, 125 of 149 records with a complaint churned (83.9%). For records without a complaint, the rate was 9.9% (173 of 1,743). These rates describe a training-sample association.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Model comparison and thresholds</h3>
+          <p>I compare a dummy baseline, logistic regression, and a tree ensemble. Preprocessing fits only on the training partition. Validation average precision selects the model. The score cutoff targets a 20% validation outreach budget, selecting scores strictly above the boundary to exclude ties. I apply that cutoff unchanged to the holdout.</p>
+          <p>A separate capacity analysis evaluates the top 10%, 20%, and 30% of the holdout ranked by the selected model. Each scenario uses the expected number of churners in an equally sized random selection as its benchmark.</p>
+        </section>
+
+        <section id="results" aria-labelledby="telecom-results-title">
+          <h2 id="telecom-results-title">04. Holdout evaluation</h2>
+          <p class="bank-callout">The validation-selected random forest reached holdout average precision of 0.825, compared with 0.157 for the prior-only baseline. The top 20% of holdout scores flagged 84 of 99 observed churners, compared with about 20 expected under random selection of the same 126 records.</p>
+          <h3 class="bank-subheading">Model comparison</h3>
+          <p>Random forest led on validation average precision. Holdout churn prevalence was 15.69%. The Brier score compares probability errors, and the report also contains reliability bins and classification metrics at a common 0.50 cutoff.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="telecom-model-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="telecom-model-caption">Validation and holdout performance. Higher AP and ROC-AUC indicate stronger rankings. Lower Brier scores indicate smaller probability errors.</caption>
+              <thead><tr><th scope="col">Model</th><th scope="col">Validation AP</th><th scope="col">Holdout AP</th><th scope="col">Holdout ROC-AUC</th><th scope="col">Holdout Brier</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Prior-only dummy</th><td>0.156</td><td>0.157</td><td>0.500</td><td>0.132</td></tr>
+                <tr><th scope="row">Logistic regression</th><td>0.778</td><td>0.725</td><td>0.922</td><td>0.075</td></tr>
+                <tr class="bank-selected-model"><th scope="row">Random forest (selected)</th><td>0.884</td><td>0.825</td><td>0.962</td><td>0.059</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/telecom-churn/precision-recall.svg" alt="Holdout precision–recall curves and average precision for the three candidate models." loading="lazy" decoding="async">
+            <figcaption>The curves show the trade-off between how many flagged records churned and how many observed churners were captured. The baseline reflects churn prevalence on the holdout.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Frozen cutoff and outreach volume</h3>
+          <p>The frozen rule (score &gt; 0.223746, rounded) flagged 125 validation records (19.94%) and 163 holdout records (25.83%). That exceeded the intended 20% outreach capacity on the holdout. It flagged 93 observed churners and 70 nonchurners, and missed 6 churners.</p>
+          <dl class="bank-metrics" aria-label="Frozen cutoff holdout performance">
+            <div><dt>Precision</dt><dd>57.06%</dd></div>
+            <div><dt>Recall</dt><dd>93.94%</dd></div>
+            <div><dt>F1 score</dt><dd>0.710</dd></div>
+          </dl>
+          <figure class="bank-figure">
+            <img src="../assets/telecom-churn/confusion-matrix.svg" alt="Holdout confusion matrix showing observed churn and whether the validation cutoff flagged each record." loading="lazy" decoding="async">
+            <figcaption>The frozen cutoff produces four groups, including churners the score misses and nonchurners it flags.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Ranked outreach at fixed capacity</h3>
+          <div class="bank-table-scroll" role="region" aria-labelledby="telecom-budget-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="telecom-budget-caption">Observed holdout outcomes. Random expectations are rounded.</caption>
+              <thead><tr><th scope="col">Budget</th><th scope="col">Flagged</th><th scope="col">Observed churners</th><th scope="col">Expected random</th><th scope="col">Precision</th><th scope="col">Recall</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">10%</th><td>63</td><td>52</td><td>10</td><td>82.54%</td><td>52.53%</td></tr>
+                <tr><th scope="row">20%</th><td>126</td><td>84</td><td>20</td><td>66.67%</td><td>84.85%</td></tr>
+                <tr><th scope="row">30%</th><td>189</td><td>96</td><td>30</td><td>50.79%</td><td>96.97%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/telecom-churn/retention-budget.svg" alt="Observed holdout churners flagged at three ranked outreach capacities versus expected random selection at an equal capacity." loading="lazy" decoding="async">
+            <figcaption>Capacity scenarios count observed churners in retrospective outreach lists. Random benchmarks use the same list sizes and the overall holdout churn prevalence.</figcaption>
+          </figure>
+        </section>
+
+        <section id="recommendations" aria-labelledby="telecom-recommendations-title">
+          <h2 id="telecom-recommendations-title">05. Recommendations and limits</h2>
+          <p>A 20% ranked list covered 84.85% of observed holdout churners, with 66.67% precision. Use the team’s capacity to cap eligible outreach, and monitor contact volume and performance on a newer cohort before expanding it.</p>
+          <p>Confirm that the complaint records predate scoring and remove cancellation requests from the input. Compare performance with and without that field once dated event data is available.</p>
+          <p>This is a single-provider historical dataset. Grouping identical inputs protects the holdout from exact profile overlap. Fresh data would be needed to assess performance over time, at a different provider, or in another subscription market.</p>
+          <p>Observed churn in a ranked list measures coverage of historical outcomes. A randomized retention pilot with an appropriate comparison group could test incremental retention, outreach cost, and opt-outs. Before using scores, check proxy effects from service and usage fields, audit who gets flagged, and respect contact eligibility and preferences.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="telecom-reproduce-title">
+          <h2 id="telecom-reproduce-title">06. Reproduce the study</h2>
+          <p>The pipeline downloads the UCI archive, validates the CSV, groups duplicate profiles, fits the models, and exports aggregate metrics and figures. The repository includes dependency versions, the data dictionary, and tests.</p>
+          <pre class="bank-command"><code>cd projects/telecom-churn
+python -m pip install -r requirements.txt
+python -m src.run</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/5699b4b9ddf6032aa8028e0be4e6bc7ba0d2b121/projects/telecom-churn">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/5699b4b9ddf6032aa8028e0be4e6bc7ba0d2b121/projects/telecom-churn/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/5699b4b9ddf6032aa8028e0be4e6bc7ba0d2b121/projects/telecom-churn/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>

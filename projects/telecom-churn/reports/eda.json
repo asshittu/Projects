@@ -1,0 +1,175 @@
+{
+  "blank_counts": {
+    "age": 0,
+    "age_group": 0,
+    "call_failure": 0,
+    "charge_amount": 0,
+    "churn": 0,
+    "complains": 0,
+    "customer_value": 0,
+    "distinct_called_numbers": 0,
+    "frequency_of_sms": 0,
+    "frequency_of_use": 0,
+    "seconds_of_use": 0,
+    "status": 0,
+    "subscription_length": 0,
+    "tariff_plan": 0
+  },
+  "charge_amount_range": [
+    0,
+    10
+  ],
+  "churn_rate": 0.15714285714285714,
+  "churners": 495,
+  "columns": 14,
+  "exact_duplicate_rows_after_first": 300,
+  "matching_profiles": 2785,
+  "mixed_label_profile_groups": 18,
+  "repeated_profile_groups": 168,
+  "rows": 3150,
+  "splits": {
+    "test": {
+      "n": 631,
+      "positives": 99,
+      "prevalence": 0.15689381933438987,
+      "profile_groups": 531
+    },
+    "train": {
+      "n": 1892,
+      "positives": 298,
+      "prevalence": 0.15750528541226216,
+      "profile_groups": 1686
+    },
+    "validation": {
+      "n": 627,
+      "positives": 98,
+      "prevalence": 0.15629984051036683,
+      "profile_groups": 568
+    }
+  },
+  "train_complaint_summary": {
+    "0": {
+      "churn_rate": 0.099254,
+      "churners": 173,
+      "customers": 1743
+    },
+    "1": {
+      "churn_rate": 0.838926,
+      "churners": 125,
+      "customers": 149
+    }
+  },
+  "train_numeric_summary": {
+    "average_call_seconds": {
+      "25%": 45.810811,
+      "50%": 59.590164,
+      "75%": 73.296703,
+      "count": 1809.0,
+      "max": 628.0,
+      "mean": 64.532353,
+      "min": 6.666667,
+      "std": 33.304195
+    },
+    "call_failure": {
+      "25%": 1.0,
+      "50%": 6.0,
+      "75%": 11.0,
+      "count": 1892.0,
+      "max": 36.0,
+      "mean": 7.608351,
+      "min": 0.0,
+      "std": 7.294181
+    },
+    "charge_amount": {
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 2.0,
+      "count": 1892.0,
+      "max": 10.0,
+      "mean": 0.96723,
+      "min": 0.0,
+      "std": 1.529538
+    },
+    "complains": {
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "count": 1892.0,
+      "max": 1.0,
+      "mean": 0.078753,
+      "min": 0.0,
+      "std": 0.269424
+    },
+    "distinct_called_numbers": {
+      "25%": 10.0,
+      "50%": 21.0,
+      "75%": 33.0,
+      "count": 1892.0,
+      "max": 95.0,
+      "mean": 23.559725,
+      "min": 0.0,
+      "std": 17.112009
+    },
+    "frequency_of_sms": {
+      "25%": 6.0,
+      "50%": 21.0,
+      "75%": 85.25,
+      "count": 1892.0,
+      "max": 515.0,
+      "mean": 72.661205,
+      "min": 0.0,
+      "std": 111.381218
+    },
+    "frequency_of_use": {
+      "25%": 28.0,
+      "50%": 53.0,
+      "75%": 94.0,
+      "count": 1892.0,
+      "max": 255.0,
+      "mean": 69.523256,
+      "min": 0.0,
+      "std": 57.520539
+    },
+    "no_voice_calls": {
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "count": 1892.0,
+      "max": 1.0,
+      "mean": 0.043869,
+      "min": 0.0,
+      "std": 0.204858
+    },
+    "seconds_of_use": {
+      "25%": 1378.0,
+      "50%": 2970.0,
+      "75%": 6426.75,
+      "count": 1892.0,
+      "max": 17090.0,
+      "mean": 4464.247886,
+      "min": 0.0,
+      "std": 4230.211715
+    },
+    "subscription_length": {
+      "25%": 29.0,
+      "50%": 35.0,
+      "75%": 38.0,
+      "count": 1892.0,
+      "max": 47.0,
+      "mean": 32.557611,
+      "min": 3.0,
+      "std": 8.460588
+    },
+    "tariff_plan": {
+      "25%": 1.0,
+      "50%": 1.0,
+      "75%": 1.0,
+      "count": 1892.0,
+      "max": 2.0,
+      "mean": 1.078224,
+      "min": 1.0,
+      "std": 0.268595
+    }
+  },
+  "zero_voice_calls": 154
+}
