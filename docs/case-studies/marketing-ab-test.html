@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketing Experiment / A/B Testing | Adeshina Shittu</title>
+  <meta name="description" content="A reproducible marketing A/B testing case study comparing observed ad and public service announcement conversion rates, with confidence intervals and a review of assignment evidence.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Marketing Experiment / A/B Testing | Adeshina Shittu">
+  <meta property="og:description" content="An independent public-data analysis of ad and public service announcement exposure, conversion, and what the available records support.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/marketing-ab-test.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/marketing-ab-test.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Marketing A/B testing</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Marketing experimentation</p>
+      <h1>Marketing <em>A/B testing.</em></h1>
+      <p class="case-lede">How did conversion differ between users shown campaign ads and users shown public service announcements, and what evidence would support a rollout?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>Experiment design</li>
+        <li>Two-proportion inference</li>
+        <li>Conversion analysis</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed study</strong>
+        <p>Measured conversion contrast and uncertainty from public exposure records.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore results</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/12c0f8aeb355cf4dc60e86a3e88e1a2e5f92e4d0/projects/marketing-ab-test">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Business question</a></li>
+          <li><a href="#data">02 / Data and assignment audit</a></li>
+          <li><a href="#workflow">03 / Analysis workflow</a></li>
+          <li><a href="#results">04 / Conversion results</a></li>
+          <li><a href="#recommendations">05 / Recommendations</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Marketing A/B testing case study">
+        <section id="problem" aria-labelledby="marketing-problem-title">
+          <h2 id="marketing-problem-title">01. The business question</h2>
+          <p>A marketing team deciding whether to expand an ad campaign needs to understand the size and uncertainty of the conversion difference. This analysis compares the share of users with a purchase recorded in the <code>ad</code> and public service announcement (<code>psa</code>) groups.</p>
+          <p>The primary measure is the ad conversion rate minus the PSA conversion rate, in percentage points. Relative lift uses the PSA rate as its denominator.</p>
+        </section>
+
+        <section id="data" aria-labelledby="marketing-data-title">
+          <h2 id="marketing-data-title">02. Data and assignment audit</h2>
+          <p>The release contains 588,101 unique user records. Each user has a single recorded exposure group and a binary <code>converted</code> outcome. The observed groups are 564,577 ad-exposed users and 23,524 PSA-exposed users.</p>
+          <dl class="bank-metrics" aria-label="Observed exposure group sizes">
+            <div><dt>Total users</dt><dd>588,101</dd></div>
+            <div><dt>Ad exposure</dt><dd>564,577</dd></div>
+            <div><dt>PSA exposure</dt><dd>23,524</dd></div>
+          </dl>
+          <figure class="bank-figure">
+            <img src="../assets/marketing-ab-test/group-allocation.svg" alt="Observed exposure counts: 564,577 users in the ad group and 23,524 users in the PSA group." loading="lazy" decoding="async">
+            <figcaption>The exposure extract contains a much larger ad group. Testing for a sample-ratio mismatch requires a planned allocation ratio.</figcaption>
+          </figure>
+          <p>The planned split, assignment logs, and pre-exposure covariates are unavailable. This makes it impossible to verify randomization or check pre-exposure balance. Every released user has a recorded exposure, so the comparison describes observed groups. An intent-to-treat analysis would require records for all assigned users, including those who saw neither an ad nor a PSA.</p>
+          <p class="bank-credit">Favio Vázquez. Marketing A/B Testing, version 1. Accessed November 18, 2026. <a href="https://www.kaggle.com/datasets/faviovaz/marketing-ab-testing">Kaggle dataset</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="marketing-workflow-title">
+          <h2 id="marketing-workflow-title">03. Analysis workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Validate user records</li>
+            <li>Audit group allocation</li>
+            <li>Compare conversions</li>
+            <li>Estimate uncertainty</li>
+            <li>Assess practical size</li>
+          </ol>
+          <h3 class="bank-subheading">Define the comparison</h3>
+          <p>I check unique users, group labels, binary outcomes, and exposure ranges before summarizing conversion. The primary comparison excludes <code>total ads</code>, <code>most ads day</code>, and <code>most ads hour</code> because they describe exposure after assignment. Adjusting for them could distort the group comparison.</p>
+          <h3 class="bank-subheading">Estimate uncertainty</h3>
+          <p>A two-sided pooled z-test evaluates equal conversion proportions. A Newcombe 95% confidence interval, built from Wilson intervals for the two rates, describes uncertainty in the absolute difference. The calculations treat user outcomes as independent.</p>
+          <h3 class="bank-subheading">Put the difference in context</h3>
+          <p>An illustrative 0.5 percentage-point benchmark corresponds to 50 conversions per 10,000 comparable users. Presenting the observed difference and its interval at the same population size gives readers a way to judge practical size. A rollout decision would also need cost, contribution margin, and an estimate of incremental conversions.</p>
+        </section>
+
+        <section id="results" aria-labelledby="marketing-results-title">
+          <h2 id="marketing-results-title">04. Conversion results</h2>
+          <p class="bank-callout">The observed ad conversion rate was 2.555%. The PSA rate was 1.785%. The difference was +0.769 percentage points (95% Newcombe CI 0.587 to 0.936 pp), or 43.1% relative to the PSA rate.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="ab-results-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="ab-results-caption">Observed exposure groups and conversion uncertainty. Values are rounded for display.</caption>
+              <thead><tr><th scope="col">Recorded exposure</th><th scope="col">Users</th><th scope="col">Conversions</th><th scope="col">Share</th><th scope="col">Conversion</th><th scope="col">Wilson 95% CI</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Advertisement</th><td>564,577</td><td>14,423</td><td>96.00%</td><td>2.555%</td><td>2.514 to 2.596%</td></tr>
+                <tr><th scope="row">Public service announcement</th><td>23,524</td><td>420</td><td>4.00%</td><td>1.785%</td><td>1.624 to 1.963%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="bank-subheading">Statistical uncertainty and practical size</h3>
+          <p>The pooled two-sided test gave z = 7.370 and p = 1.71e-13. It tests equal conversion proportions under the independence assumption.</p>
+          <p>The observed difference corresponds to about 77 more recorded conversions per 10,000 comparable users, with a 95% interval of 59 to 94. The interval clears the illustrative +0.50 pp hurdle. Choose a campaign-specific hurdle before the next test.</p>
+          <figure class="bank-figure">
+            <img src="../assets/marketing-ab-test/conversion-rates.svg" alt="Observed conversion rates and 95% confidence intervals for the PSA and ad exposure groups." loading="lazy" decoding="async">
+            <figcaption>Each conversion rate uses the number of users in its own observed exposure group.</figcaption>
+          </figure>
+          <figure class="bank-figure">
+            <img src="../assets/marketing-ab-test/absolute-lift.svg" alt="Observed ad-minus-PSA conversion difference with a 95% confidence interval, no-difference reference, and illustrative 0.5 percentage-point benchmark." loading="lazy" decoding="async">
+            <figcaption>The zero line marks equal conversion rates. The 0.5 percentage-point benchmark gives an illustrative scale for practical materiality.</figcaption>
+          </figure>
+        </section>
+
+        <section id="recommendations" aria-labelledby="marketing-recommendations-title">
+          <h2 id="marketing-recommendations-title">05. Recommendations and limits</h2>
+          <p>Use the measured gap to plan a controlled follow-up. Record the intended allocation, log assignment and exposure separately, and include every assigned user in the primary analysis. Define the conversion window and a minimum detectable lift before launching.</p>
+          <p>Choose the minimum actionable lift from the cost of serving the ad and contribution margin per incremental conversion. Collect those inputs before using the follow-up to make a rollout decision.</p>
+          <p>The confidence interval and test address sampling uncertainty under the stated assumptions. Assignment and exposure selection could contribute to the observed difference. Verified random assignment and outcomes for all assigned users would support an estimate of incremental conversion.</p>
+          <p>The public extract omits spend, product margin, and campaign economics. A business decision would need those inputs and a design that can estimate incremental conversions at the intended scale.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="marketing-reproduce-title">
+          <h2 id="marketing-reproduce-title">06. Reproduce the study</h2>
+          <p>The pipeline downloads the pinned version 1 archive through Kaggle’s public API, validates the user records, and exports aggregate statistics and charts. It caches the download in the project’s ignored <code>data/raw</code> directory. The project includes its dependency versions, data dictionary, and tests.</p>
+          <pre class="bank-command"><code>cd projects/marketing-ab-test
+python -m pip install -r requirements.txt
+python -m src.run</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/12c0f8aeb355cf4dc60e86a3e88e1a2e5f92e4d0/projects/marketing-ab-test">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/12c0f8aeb355cf4dc60e86a3e88e1a2e5f92e4d0/projects/marketing-ab-test/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/12c0f8aeb355cf4dc60e86a3e88e1a2e5f92e4d0/projects/marketing-ab-test/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
