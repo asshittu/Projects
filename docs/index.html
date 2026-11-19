@@ -13,6 +13,25 @@
   <meta property="og:description" content="Selected work in data analysis, experimentation, and machine learning.">
   <meta property="og:image" content="https://asshittu.github.io/Projects/assets/portfolio/architecture.webp">
   <meta property="og:image:alt" content="A modern glass and concrete building against a blue sky.">
+  <script>
+    // Reset the homepage on reload, while honoring section links on new visits.
+    if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+      const previousRestoration = history.scrollRestoration;
+      history.scrollRestoration = 'manual';
+      if (location.hash) {
+        history.replaceState(history.state, '', location.pathname + location.search);
+      }
+      window.addEventListener('pageshow', () => {
+        // Let the browser finish handling the previous scroll position first.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.scrollTo(0, 0);
+            history.scrollRestoration = previousRestoration;
+          });
+        });
+      }, { once: true });
+    }
+  </script>
   <link rel="icon" href="assets/portfolio/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/portfolio.css">
   <script src="assets/js/portfolio.js" defer></script>
