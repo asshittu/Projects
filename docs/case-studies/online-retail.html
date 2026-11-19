@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retail Analytics &amp; Customer Segmentation | Adeshina Shittu</title>
+  <meta name="description" content="A reproducible DuckDB pipeline that separates retail sales from credits and turns public Online Retail invoices into monthly, customer segment, and repeat-purchase reports.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Retail Analytics &amp; Customer Segmentation | Adeshina Shittu">
+  <meta property="og:description" content="An end-to-end public-data case study on retail line value, rule-based RFM segments, and first-observed purchase cohorts.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/online-retail.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/online-retail.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Online retail</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Retail analytics</p>
+      <h1>Retail analytics <em>&amp; customer segmentation.</em></h1>
+      <p class="case-lede">Turn a year of retail invoice lines into monthly sales and credit reporting, customer segments, and repeat-purchase cohorts.</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>DuckDB</li>
+        <li>SQL</li>
+        <li>RFM segmentation</li>
+        <li>Cohort analysis</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed study</strong>
+        <p>Reconciled DuckDB marts and observed customer activity from the UCI workbook.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore results</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/e42dbfca5bc6b3ae419f3531f8fa01ea7b6ed712/projects/online-retail">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Business question</a></li>
+          <li><a href="#data">02 / Data and observation window</a></li>
+          <li><a href="#workflow">03 / SQL workflow</a></li>
+          <li><a href="#results">04 / Retail reporting results</a></li>
+          <li><a href="#recommendations">05 / Recommendations</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Online retail analytics case study">
+        <section id="problem" aria-labelledby="retail-problem-title">
+          <h2 id="retail-problem-title">01. The business question</h2>
+          <p>A retail operations team needs a consistent view of recorded sales and credits. A customer marketing team needs to know which identifiable shoppers bought recently, returned for another order, and had higher net recorded value.</p>
+          <p>The pipeline builds both views from the same classified invoice lines so the impact of cancelled invoices and missing customer IDs is visible.</p>
+        </section>
+
+        <section id="data" aria-labelledby="retail-data-title">
+          <h2 id="retail-data-title">02. Data and observation window</h2>
+          <p>UCI Online Retail contains 541,909 invoice lines from a UK-based online retailer, recorded December 1, 2010 through December 9, 2011. The file includes invoice and item codes, quantity, unit price in pounds sterling, invoice timestamps, country, and customer IDs where recorded.</p>
+          <p>The customer snapshot uses December 1, 2011 as its cutoff. Monthly trend and cohort comparisons stop at November 2011 so their final month has a full observation window. Reconciliation retains all source lines and keeps the partial month visible as part of the import.</p>
+          <p class="bank-credit">Daqing Chen (2015), Online Retail, UCI Machine Learning Repository. Accessed November 18, 2026. <a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI Online Retail</a> · <a href="https://doi.org/10.24432/C5BW33">DOI 10.24432/C5BW33</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="retail-workflow-title">
+          <h2 id="retail-workflow-title">03. SQL from invoice lines to reports</h2>
+          <ol class="case-steps" role="list">
+            <li>Ingest the workbook</li>
+            <li>Classify each line</li>
+            <li>Summarize by month</li>
+            <li>Build customer segments</li>
+            <li>Measure repeat purchase</li>
+          </ol>
+          <h3 class="bank-subheading">Reconcile sales and credits</h3>
+          <p>A sale line has positive quantity, positive unit price, and an invoice code without the <code>C</code> cancellation prefix. A credit line has negative quantity, positive unit price, and a <code>C</code> invoice code. The pipeline reports zero-value lines, administrative and nonstandard codes, and negative quantities without a cancellation code separately. The data dictionary provides the exact exclusions. Recognized line value multiplies quantity by unit price. Monthly net line value subtracts credit magnitude from gross sale value.</p>
+          <p>Eligible lines without a customer ID contribute to financial summaries. The customer-level marts use only identified records to avoid treating anonymous invoices as one shopper. The public reports contain aggregates.</p>
+          <h3 class="bank-subheading">Build a customer snapshot</h3>
+          <p>Recency is the number of days since a customer’s last recognized sale, frequency counts distinct qualifying invoices, and monetary value uses recognized sales minus credits. The rule-based segments combine whether the latest purchase was within 30 days, whether the customer had at least two purchase invoices, and whether net value was at least the eligible-customer median.</p>
+          <h3 class="bank-subheading">Track first-observed purchase cohorts</h3>
+          <p>Customers enter a cohort in the month of their first observed qualifying purchase. Repeat purchase rates count the share who made a qualifying purchase in each later month. The fixed cutoff leaves more follow-up time for earlier cohorts and fewer observable months for recent ones.</p>
+        </section>
+
+        <section id="results" aria-labelledby="retail-results-title">
+          <h2 id="retail-results-title">04. Retail reporting results</h2>
+          <p class="bank-callout">The commercial ledger reconciled £10,563,520.52 in gross paid line value and £490,663.71 in posted credits to £10,072,856.81 in net recorded line value. The extract contains 19,852 distinct paid invoices.</p>
+          <h3 class="bank-subheading">Ledger reconciliation</h3>
+          <p>The pipeline classified all 541,909 source lines. It counted 529,765 sale lines and 8,833 credit lines and isolated 3,311 excluded lines. Customer ID was missing on 135,080 source lines. Eligible lines with missing IDs contributed £1,700,940.89 to recorded net value.</p>
+          <p>November 2011 had the highest net line value of the complete months, at £1,480,295.72. The partial December 2011 figure was £464,172.32 through December 9. Use the complete months for month-to-month comparisons.</p>
+          <figure class="bank-figure">
+            <img src="../assets/online-retail/monthly-line-values.svg" alt="Gross sales and net recorded line value by month, with partial December 2011 marked separately." loading="lazy" decoding="async">
+            <figcaption>Monthly line value separates qualifying sales and credits. The trend connects fully observed months through November 2011. A separate marker identifies partial December.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Customer segmentation snapshot</h3>
+          <p>The customer snapshot contains 4,293 identified buyers with a qualifying paid invoice. The monetary threshold was the observed net value median, £642.81. The recent high-value repeat segment contained 1,130 customers.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="retail-segment-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="retail-segment-caption">Observed segments before December 1, 2011. Currency is rounded to pounds and pence.</caption>
+              <thead><tr><th scope="col">RFM segment</th><th scope="col">Customers</th><th scope="col">Median days since purchase</th><th scope="col">Median paid invoices</th><th scope="col">Median net value</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Recent high-value repeat</th><td>1,130</td><td>11</td><td>6</td><td>£2,043.16</td></tr>
+                <tr><th scope="row">Other recent</th><td>531</td><td>15</td><td>1</td><td>£344.00</td></tr>
+                <tr><th scope="row">Earlier repeat</th><td>1,358</td><td>78</td><td>3</td><td>£849.44</td></tr>
+                <tr><th scope="row">Earlier single-invoice</th><td>1,274</td><td>174</td><td>1</td><td>£254.78</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/online-retail/rfm-segments.svg" alt="Identified customer counts across rule-based recency, frequency, and monetary-value segments." loading="lazy" decoding="async">
+            <figcaption>The segment snapshot uses only qualifying customer histories recorded before December 1, 2011.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Repeat purchase activity</h3>
+          <p>Among 884 customers first observed in December 2010, 323 made a qualifying purchase in the next month (36.5%). A first observed purchase only anchors the cohort in this file.</p>
+          <figure class="bank-figure">
+            <img src="../assets/online-retail/cohort-repeat.svg" alt="Repeat purchase rates by first observed purchase month and months since that purchase." loading="lazy" decoding="async">
+            <figcaption>Each cohort row shows observed returns in later months. Blank cells indicate that the follow-up month falls beyond the observation cutoff.</figcaption>
+          </figure>
+        </section>
+
+        <section id="recommendations" aria-labelledby="retail-recommendations-title">
+          <h2 id="retail-recommendations-title">05. Recommendations and limits</h2>
+          <p>Use complete months for regular performance comparisons. Reconcile credits to the operational ledger and review anonymous invoice coverage before interpreting changes across months.</p>
+          <p>Consider a small retention pilot with eligible recent repeat buyers. Track subsequent orders, contribution margin, and opt-outs against a comparison group. Review results before expanding outreach.</p>
+          <p>Line value summarizes the invoice extract. Measuring profit requires costs and accounting adjustments that this file omits. Finance should reconcile the transaction categories and credits to the underlying ledger before using them in formal reporting.</p>
+          <p>The file starts after some customers may have already shopped. A first observed purchase anchors follow-up within the extract. A month without a recorded purchase shows a gap in observed activity, and customers can return later.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="retail-reproduce-title">
+          <h2 id="retail-reproduce-title">06. Reproduce the study</h2>
+          <p>The Python entry point downloads the UCI workbook and runs the DuckDB transformations. The project includes the data dictionary, validation tests, and aggregate reporting outputs.</p>
+          <pre class="bank-command"><code>cd projects/online-retail
+python -m pip install -r requirements.txt
+python -m src.run</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/e42dbfca5bc6b3ae419f3531f8fa01ea7b6ed712/projects/online-retail">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/e42dbfca5bc6b3ae419f3531f8fa01ea7b6ed712/projects/online-retail/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/tree/e42dbfca5bc6b3ae419f3531f8fa01ea7b6ed712/projects/online-retail/reports">Machine-readable reports</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
