@@ -1,0 +1,104 @@
+{
+  "folds": [
+    {
+      "models": {
+        "hist_gradient_boosting": {
+          "mae": 7.707984883469502,
+          "rmsle": 0.6011167574779979
+        },
+        "seasonal_naive": {
+          "mae": 11.916650643256606,
+          "rmsle": 0.7978158641418321
+        }
+      },
+      "n_evaluated": 24958,
+      "n_simulated_training_origins": 9,
+      "n_train": 169644,
+      "name": "validation_1",
+      "origin": "2016-12-26",
+      "target_end": "2017-02-03",
+      "target_start": "2016-12-27"
+    },
+    {
+      "models": {
+        "hist_gradient_boosting": {
+          "mae": 6.956517810514934,
+          "rmsle": 0.5301758577443093
+        },
+        "seasonal_naive": {
+          "mae": 8.669920396323256,
+          "rmsle": 0.678370707417591
+        }
+      },
+      "n_evaluated": 27597,
+      "n_simulated_training_origins": 10,
+      "n_train": 194602,
+      "name": "validation_2",
+      "origin": "2017-02-03",
+      "target_end": "2017-03-14",
+      "target_start": "2017-02-04"
+    },
+    {
+      "models": {
+        "hist_gradient_boosting": {
+          "mae": 7.450996342072443,
+          "rmsle": 0.5423169372323904
+        },
+        "seasonal_naive": {
+          "mae": 9.682420617671283,
+          "rmsle": 0.6881805829638036
+        }
+      },
+      "n_evaluated": 28031,
+      "n_simulated_training_origins": 11,
+      "n_train": 222199,
+      "name": "holdout",
+      "origin": "2017-03-14",
+      "target_end": "2017-04-22",
+      "target_start": "2017-03-15"
+    }
+  ],
+  "horizon_days": 39,
+  "n_folds": 3,
+  "overall": {
+    "models": {
+      "hist_gradient_boosting": {
+        "mae": 7.361251175179871,
+        "rmsle": 0.5571994230293534
+      },
+      "seasonal_naive": {
+        "mae": 10.02764118166524,
+        "rmsle": 0.720734566166878
+      }
+    },
+    "n_evaluated": 80586
+  },
+  "planning": {
+    "headroom": 0.1,
+    "model": "hist_gradient_boosting",
+    "n_evaluated": 28031,
+    "shift_slots_with_headroom": 50042,
+    "shift_slots_without_headroom": 47141,
+    "under_capacity_days_with_headroom": 3903,
+    "under_capacity_days_without_headroom": 4933,
+    "visitors_per_shift": 18
+  },
+  "selection": {
+    "criterion": "pooled_validation_rmsle",
+    "model": "hist_gradient_boosting",
+    "tie_breaker": "seasonal_naive"
+  },
+  "validation": {
+    "models": {
+      "hist_gradient_boosting": {
+        "mae": 7.313384240099181,
+        "rmsle": 0.5649769335875745
+      },
+      "seasonal_naive": {
+        "mae": 10.211769763709091,
+        "rmsle": 0.7375103588791806
+      }
+    },
+    "n_evaluated": 52555
+  }
+}

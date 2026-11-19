@@ -1,6 +1,6 @@
 # Recruit Restaurant Visitor Forecasting data
 
-This notebook uses the official Kaggle competition files inside an eligible account’s private workspace. Access and reuse follow the accepted competition rules. The public repository contains code and artificial test fixtures. The evaluation exports aggregate counts and errors only. [Kaggle data](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/data) · [Competition rules](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/rules)
+Recruit Holdings provided the dataset for its Restaurant Visitor Forecasting competition on Kaggle. The evaluation ran inside an eligible account’s private Kaggle workspace. Access and reuse follow the competition rules. This repository contains the analysis code, artificial test fixtures and aggregate results shared from that run. [Kaggle data](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/data) · [Competition rules](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/rules)
 
 | Input | Fields used | Purpose |
 | --- | --- | --- |
