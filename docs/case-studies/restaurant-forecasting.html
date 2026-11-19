@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant Visitor Forecasting | Adeshina Shittu</title>
+  <meta name="description" content="Comparing 39-day forecasts of daily restaurant visits and testing the capacity trade-off of adding a staffing buffer.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Restaurant Visitor Forecasting | Adeshina Shittu">
+  <meta property="og:description" content="Comparing 39-day forecasts of daily restaurant visits and testing the capacity trade-off of adding a staffing buffer.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/restaurant-forecasting.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/restaurant-forecasting.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Restaurant Visitor Forecasting</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Time series forecasting</p>
+      <h1>Restaurant visitor <em>forecasting.</em></h1>
+      <p class="case-lede">Comparing 39-day forecasts of daily restaurant visits and testing the capacity trade-off of adding a staffing buffer.</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>scikit-learn</li>
+        <li>Backtesting</li>
+        <li>Capacity planning</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed historical study</strong>
+        <p>Measured errors from a private Kaggle run on Recruit’s historical AIR data.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore results</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/7404877b669f469625c9b48cf545a662a5ff65da/projects/restaurant-forecasting">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Capacity planning question</a></li>
+          <li><a href="#data">02 / Dataset and backtest</a></li>
+          <li><a href="#workflow">03 / Forecasting workflow</a></li>
+          <li><a href="#results">04 / Measured forecast errors</a></li>
+          <li><a href="#recommendations">05 / Staffing scenario and limits</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Restaurant Visitor Forecasting case study">
+        <section id="problem" aria-labelledby="restaurant-forecasting-problem-title">
+          <h2 id="restaurant-forecasting-problem-title">01. Capacity planning question</h2>
+          <p>Restaurant managers need an estimate of daily demand before committing staff hours. The project compares two ways to forecast daily visitor totals by location across a 39-day planning horizon.</p>
+          <p>Mean absolute error (MAE) describes a typical miss in visitors per store-day. Root mean squared logarithmic error (RMSLE) computes error after adding one and taking the log of each count. It handles zero counts and puts more emphasis on relative differences than MAE does.</p>
+        </section>
+
+        <section id="data" aria-labelledby="restaurant-forecasting-data-title">
+          <h2 id="restaurant-forecasting-data-title">02. Dataset and backtest</h2>
+          <p>Recruit Holdings released historical restaurant visits, reservations, and a Japanese holiday calendar for its forecasting competition. The analysis uses AIR visit and reservation records. The competition sample file sets the 39-day horizon. Evaluation covers 80,586 observed store-days across three consecutive historical windows. The latest window serves as the holdout.</p>
+          <p>Input checks enforce valid dates and nonnegative integer counts, unique store-days and calendar coverage. The loader removes reservations recorded after their visit time. Unrecorded store-days stay outside the analysis because their visitor counts are unknown.</p>
+          <p class="bank-credit">The evaluation ran in a private Kaggle notebook using the official competition files. <a href="https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/data">Recruit Restaurant Visitor Forecasting data</a> · <a href="https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/rules">Competition rules</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="restaurant-forecasting-workflow-title">
+          <h2 id="restaurant-forecasting-workflow-title">03. Forecasting workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Validate inputs</li>
+            <li>Set forecast origins</li>
+            <li>Build dated features</li>
+            <li>Compare models</li>
+            <li>Test on holdout</li>
+          </ol>
+          <h3 class="bank-subheading">Two models at each forecast origin</h3>
+          <p>The seasonal naïve baseline repeats the last observed count for the target weekday at that location. It falls back to the store mean and then the overall mean. Histogram gradient boosting adds lead time, weekday, month, holiday, historical store averages, and booking counts available by the cutoff.</p>
+          <h3 class="bank-subheading">Historical snapshots respect the cutoff</h3>
+          <p>Each forecast uses visits observed by the end of its origin date. Reservations must be booked before the following midnight, even when their service date falls later. The tree model trains on earlier snapshots that use the same cutoff logic. All training targets are observed by the current forecast origin. Pooled validation RMSLE chooses the model before the holdout comparison.</p>
+        </section>
+
+        <section id="results" aria-labelledby="restaurant-forecasting-results-title">
+          <h2 id="restaurant-forecasting-results-title">04. Measured forecast errors</h2>
+          <p class="bank-callout">On 28,031 holdout store-days, gradient boosting averaged 7.45 visitors of absolute error versus 9.68 for the seasonal baseline. Its holdout RMSLE was 0.542 versus 0.688.</p>
+          <p>Gradient boosting had the lower pooled validation RMSLE and was selected for the holdout capacity scenario. It reduced holdout MAE by about 23% and RMSLE by 21% relative to the baseline.</p>
+          <p>The two validation windows span Dec 27, 2016 to Mar 14, 2017. The holdout runs from Mar 15 to Apr 22, 2017.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="forecast-errors-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="forecast-errors-caption">Errors calculated on the same observed AIR store-days for each model. Lower is better.</caption>
+              <thead><tr><th scope="col">Window</th><th scope="col">Store-days</th><th scope="col">Seasonal MAE</th><th scope="col">Boosting MAE</th><th scope="col">Seasonal RMSLE</th><th scope="col">Boosting RMSLE</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Validation 1</th><td>24,958</td><td>11.92</td><td>7.71</td><td>0.798</td><td>0.601</td></tr>
+                <tr><th scope="row">Validation 2</th><td>27,597</td><td>8.67</td><td>6.96</td><td>0.678</td><td>0.530</td></tr>
+                <tr><th scope="row">Pooled validation</th><td>52,555</td><td>10.21</td><td>7.31</td><td>0.738</td><td>0.565</td></tr>
+                <tr><th scope="row">Holdout</th><td>28,031</td><td>9.68</td><td>7.45</td><td>0.688</td><td>0.542</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/restaurant-forecasting/mae-by-window.svg" alt="Mean absolute error for gradient boosting is below the seasonal baseline in all three windows." loading="lazy" decoding="async">
+            <figcaption>The first validation window had the highest absolute error for both models.</figcaption>
+          </figure>
+          <figure class="bank-figure">
+            <img src="../assets/restaurant-forecasting/rmsle-by-window.svg" alt="Gradient boosting has lower RMSLE in both validation windows and the holdout, where it scores 0.542 versus 0.688." loading="lazy" decoding="async">
+            <figcaption>The model selected using pooled validation RMSLE also led on the latest historical window.</figcaption>
+          </figure>
+        </section>
+
+        <section id="recommendations" aria-labelledby="restaurant-forecasting-recommendations-title">
+          <h2 id="restaurant-forecasting-recommendations-title">05. Staffing scenario and limits</h2>
+          <p>Suppose one shift slot can cover 18 visitors. Apply each day’s forecast, divide by capacity per slot, and round up. Add 10% to the forecast before rounding in the second scenario.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="forecast-capacity-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="forecast-capacity-caption">Illustrative capacity based on the selected model’s holdout forecasts.</caption>
+              <thead><tr><th scope="col">Headroom</th><th scope="col">Modeled shift slots</th><th scope="col">Store-days above capacity</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">0%</th><td>47,141</td><td>4,933 (17.60%)</td></tr>
+                <tr><th scope="row">10%</th><td>50,042</td><td>3,903 (13.92%)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The buffer trades 2,901 additional modeled slots for 1,030 fewer store-days above modeled capacity. This scenario uses assumed capacity. Live schedules would require staffing costs, role coverage, visitor arrival times, and service-level targets.</p>
+          <p>Validate the model across newer periods and inspect poor forecasts by location and lead time before using it for staffing. Historical results apply to store-days with a recorded AIR count. The backtest has no direct evidence on closures, new restaurants, or workload across hours of a day.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="restaurant-forecasting-reproduce-title">
+          <h2 id="restaurant-forecasting-reproduce-title">06. Reproduce the study</h2>
+          <p>Run the notebook privately on Kaggle after accepting the Recruit competition terms and attaching the official data. It exports aggregate historical errors and charts. The figures here were regenerated from those exported numbers. The local test suite can run with synthetic fixtures.</p>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/7404877b669f469625c9b48cf545a662a5ff65da/projects/restaurant-forecasting">Project code and instructions</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/7404877b669f469625c9b48cf545a662a5ff65da/projects/restaurant-forecasting/restaurant-forecasting.ipynb">Kaggle notebook</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/7404877b669f469625c9b48cf545a662a5ff65da/projects/restaurant-forecasting/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/7404877b669f469625c9b48cf545a662a5ff65da/projects/restaurant-forecasting/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>

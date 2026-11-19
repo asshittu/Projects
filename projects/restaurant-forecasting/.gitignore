@@ -1,0 +1,6 @@
+/data/
+/results/
+/.venv/
+/.kaggle/
+/restaurant-forecasting-results.zip
+__pycache__/
