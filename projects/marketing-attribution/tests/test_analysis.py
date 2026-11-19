@@ -3,9 +3,7 @@
 import unittest
 
 import duckdb
-
 from src.analysis import analyze, source_summary
-
 
 DAY = 86_400
 

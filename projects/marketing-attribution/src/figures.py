@@ -10,7 +10,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator, StrMethodFormatter
 
-
 SOURCE = "https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/"
 LICENSE = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 INK = "#162a41"

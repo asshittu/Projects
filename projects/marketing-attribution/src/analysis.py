@@ -3,7 +3,6 @@
 from math import isclose
 from pathlib import Path
 
-
 PROJECT = Path(__file__).resolve().parents[1]
 CREDIT_FIELDS = ("first_touch", "last_touch", "linear_touch")
 

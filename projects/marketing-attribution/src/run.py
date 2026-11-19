@@ -2,10 +2,10 @@
 
 import argparse
 import csv
-from datetime import datetime
 import json
 import logging
 import os
+from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from zoneinfo import ZoneInfo
@@ -13,8 +13,14 @@ from zoneinfo import ZoneInfo
 import duckdb
 
 from .analysis import PROJECT, analyze
-from .data import DATASET_URL, DOWNLOAD_URL, REVISION, SHA256, acquire_data, load_impressions
-
+from .data import (
+    DATASET_URL,
+    DOWNLOAD_URL,
+    REVISION,
+    SHA256,
+    acquire_data,
+    load_impressions,
+)
 
 LOGGER = logging.getLogger(__name__)
 

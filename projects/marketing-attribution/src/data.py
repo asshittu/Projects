@@ -7,7 +7,6 @@ from shutil import copyfileobj
 from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
 
-
 DATASET_URL = "https://ailab.criteo.com/criteo-attribution-modeling-bidding-dataset/"
 MIRROR_URL = "https://huggingface.co/datasets/criteo/criteo-attribution-dataset"
 REVISION = "904188a63cbad78bee43cd26ff5ee4ac77903986"
