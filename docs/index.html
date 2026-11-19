@@ -21,11 +21,18 @@
       if (location.hash) {
         history.replaceState(history.state, '', location.pathname + location.search);
       }
+      const resetScroll = () => {
+        if (!location.hash) window.scrollTo(0, 0);
+      };
+      document.addEventListener('DOMContentLoaded', () => {
+        resetScroll();
+        requestAnimationFrame(resetScroll);
+      }, { once: true });
       window.addEventListener('pageshow', () => {
-        // Let the browser finish handling the previous scroll position first.
+        // Browsers can reapply the saved position after late-loading images.
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            window.scrollTo(0, 0);
+            resetScroll();
             history.scrollRestoration = previousRestoration;
           });
         });
