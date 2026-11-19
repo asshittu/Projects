@@ -1,0 +1,21 @@
+{
+  "blank_counts": {
+    "label": 0,
+    "text": 0
+  },
+  "sentences": 996,
+  "train_word_counts_by_label": {
+    "0": {
+      "maximum_words": 32,
+      "median_words": 10.0,
+      "minimum_words": 2,
+      "rows": 298
+    },
+    "1": {
+      "maximum_words": 32,
+      "median_words": 9.0,
+      "minimum_words": 2,
+      "rows": 299
+    }
+  }
+}
