@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bank Marketing Conversion Prediction | Adeshina Shittu</title>
+  <meta name="description" content="An end-to-end case study on ranking eligible bank marketing contacts for term-deposit subscription using public UCI data and a chronological holdout.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bank Marketing Conversion Prediction | Adeshina Shittu">
+  <meta property="og:description" content="A public-data machine learning case study on pre-contact scoring and capacity-aware evaluation for bank telemarketing.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/bank-marketing.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/bank-marketing.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Bank marketing</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Machine learning</p>
+      <h1>Bank marketing <em>conversion prediction.</em></h1>
+      <p class="case-lede">Can a score available before a phone call help a bank prioritize eligible contacts for a term-deposit campaign?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>scikit-learn</li>
+        <li>Binary classification</li>
+        <li>Chronological validation</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed study</strong>
+        <p>A reproducible public-data project with measured chronological holdout results.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore evaluation</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/418c94ec123de48f4336db5e5030a016662f0c0b/projects/bank-marketing">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Business question</a></li>
+          <li><a href="#data">02 / Data and chronological split</a></li>
+          <li><a href="#workflow">03 / Modeling workflow</a></li>
+          <li><a href="#results">04 / Holdout evaluation</a></li>
+          <li><a href="#recommendations">05 / Recommendations</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Bank marketing conversion case study">
+        <section id="problem" aria-labelledby="bank-problem-title">
+          <h2 id="bank-problem-title">01. The business question</h2>
+          <p>A campaign manager with limited call capacity must decide which eligible contacts to prioritize. The model estimates the likelihood of a term-deposit subscription, recorded as <code>y</code>, using information available before the call.</p>
+          <p>The main ranking metric is average precision, which summarizes the precision–recall curve and accounts for the scarcity of positive outcomes in the earlier campaigns. At the contact budget, precision estimates how many selected records converted and recall shows how many observed subscriptions those records cover.</p>
+        </section>
+
+        <section id="data" aria-labelledby="bank-data-title">
+          <h2 id="bank-data-title">02. Data and chronological split</h2>
+          <p>The original <code>bank-full.csv</code> contains 45,211 contact records from historical phone campaigns at a Portuguese bank. There were 5,289 recorded subscriptions, or 11.70% of the dataset.</p>
+          <p>Validation found zero blank cells and zero exact duplicate records. The source uses explicit unknown categories and marks 36,954 records with no prior contact.</p>
+          <p>The file is ordered by date. I used its first 60% for training, the next 20% for validation, and the final 20% as the holdout. Individual row timestamps and customer IDs are unavailable. The row-order split approximates a forward test, with a possibility that a customer appears in more than one split.</p>
+          <dl class="bank-metrics" aria-label="Subscription rates by chronological split">
+            <div><dt>Training · 27,126 rows</dt><dd>5.04%</dd></div>
+            <div><dt>Validation · 9,042 rows</dt><dd>11.79%</dd></div>
+            <div><dt>Holdout · 9,043 rows</dt><dd>31.58%</dd></div>
+          </dl>
+          <figure class="bank-figure">
+            <img src="../assets/bank-marketing/cohort-prevalence.svg" alt="Recorded subscription rate rose from 5.04% in training to 11.79% in validation and 31.58% on holdout." loading="lazy" decoding="async">
+            <figcaption>Subscription prevalence rises in later records. This changes the baseline for precision and makes the chronological holdout especially important.</figcaption>
+          </figure>
+          <p class="bank-credit">S. Moro, P. Rita, and P. Cortez (2014). Accessed November 18, 2026. <a href="https://archive.ics.uci.edu/dataset/222/bank+marketing">UCI Bank Marketing</a> · <a href="https://doi.org/10.24432/C5K306">DOI 10.24432/C5K306</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="bank-workflow-title">
+          <h2 id="bank-workflow-title">03. Modeling workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Validate fields</li>
+            <li>Audit availability</li>
+            <li>Split by row order</li>
+            <li>Train and compare</li>
+            <li>Evaluate the policy</li>
+          </ol>
+          <h3 class="bank-subheading">Feature availability</h3>
+          <p>Inputs include job, education, credit default, balance, housing and personal loan indicators, days since prior contact, prior contact count, and previous campaign outcome. The prior-contact feature separates the <code>pdays = -1</code> sentinel into a contact indicator and a missing prior-contact interval. The categorical value <code>unknown</code> is kept as recorded.</p>
+          <p>The current campaign’s <code>duration</code> is only known once the call has happened. The current campaign contact count includes that call, and contact type, day, and month describe the last contact. I excluded those five fields along with age and marital status.</p>
+          <h3 class="bank-subheading">Comparison and decision policy</h3>
+          <p>I compared a dummy baseline, logistic regression, and a tree ensemble. The preprocessing pipeline fits its encoders, imputers, and scaling using training rows. Validation guides model selection and sets a probability cutoff for a 20% contact budget. The cutoff stays fixed on the chronological holdout.</p>
+          <p>A separate capacity analysis ranks holdout scores and evaluates the top 10%, 20%, and 30% of records. Each scenario uses the expected performance of an equally sized random selection as a benchmark.</p>
+        </section>
+
+        <section id="results" aria-labelledby="bank-results-title">
+          <h2 id="bank-results-title">04. Holdout evaluation</h2>
+          <p class="bank-callout">The validation-selected random forest achieved holdout average precision of <strong>0.420</strong> versus <strong>0.316</strong> for the prior-only baseline. At a fixed 20% holdout call budget, its ranking identified <strong>841</strong> recorded subscriptions versus about <strong>571</strong> expected from random selection.</p>
+
+          <h3 class="bank-subheading">Model comparison</h3>
+          <p>Validation average precision selected random forest. Logistic regression ranked better on the later holdout. The outreach analysis keeps the original validation choice so the holdout stays a test of that decision.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="bank-model-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="bank-model-caption">Higher average precision (AP) and ROC-AUC indicate better rankings. Lower Brier scores indicate smaller probability errors.</caption>
+              <thead>
+                <tr><th scope="col">Model</th><th scope="col">Validation AP</th><th scope="col">Holdout AP</th><th scope="col">Holdout ROC-AUC</th><th scope="col">Holdout Brier</th></tr>
+              </thead>
+              <tbody>
+                  <tr><th scope="row">Prior-only dummy</th><td>0.118</td><td>0.316</td><td>0.500</td><td>0.287</td></tr>
+                  <tr><th scope="row">Logistic regression</th><td>0.180</td><td>0.472</td><td>0.662</td><td>0.278</td></tr>
+                  <tr class="bank-selected-model"><th scope="row">Random forest (selected)</th><td>0.190</td><td>0.420</td><td>0.631</td><td>0.282</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/bank-marketing/precision-recall.svg" alt="Holdout precision–recall curves for the trained classifiers and the dummy baseline." loading="lazy" decoding="async">
+            <figcaption>Precision–recall measures the trade-off between contact efficiency and coverage. The prevalence reference follows the share of subscriptions in the holdout data.</figcaption>
+          </figure>
+
+          <h3 class="bank-subheading">Probability calibration</h3>
+          <p>The forest’s mean predicted probability was 5.34% on the holdout, where the recorded subscription rate was 31.58%. That gap limits the use of its scores as absolute probabilities. At the common 0.50 comparison cutoff, all three models selected zero rows and had zero recall and F1. Precision is undefined with zero selections.</p>
+          <figure class="bank-figure">
+            <img src="../assets/bank-marketing/calibration.svg" alt="Holdout calibration plot comparing predicted subscription probabilities with observed subscription rates." loading="lazy" decoding="async">
+            <figcaption>The diagonal marks agreement between a predicted probability and the observed subscription rate. Brier score summarizes squared probability error. The plot labels bins with fewer than 30 records.</figcaption>
+          </figure>
+
+          <h3 class="bank-subheading">Frozen cutoff and actual contact volume</h3>
+          <p>The strict cutoff of score &gt; 0.061447 (rounded) selected 1,808 validation records (20.00%). It selected 2,486 later records (27.49%), above the 20% budget. The selection included 1,120 subscriptions, with 1,366 non-subscribers selected and 1,736 subscribers missed.</p>
+          <dl class="bank-metrics" aria-label="Frozen cutoff holdout performance">
+            <div><dt>Precision</dt><dd>45.05%</dd></div>
+            <div><dt>Recall</dt><dd>39.22%</dd></div>
+            <div><dt>F1 score</dt><dd>0.419</dd></div>
+          </dl>
+          <figure class="bank-figure">
+            <img src="../assets/bank-marketing/confusion-matrix.svg" alt="Holdout confusion matrix showing selected and unselected records by actual subscription outcome." loading="lazy" decoding="async">
+            <figcaption>The confusion matrix applies the validation cutoff without changing it. It describes classification decisions in the later cohort.</figcaption>
+          </figure>
+
+          <h3 class="bank-subheading">Ranked outreach at a fixed capacity</h3>
+          <div class="bank-table-scroll" role="region" aria-labelledby="bank-budget-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="bank-budget-caption">Historical holdout outcomes for fixed-size contact lists. Expected random subscriptions are rounded.</caption>
+              <thead>
+                <tr><th scope="col">Budget</th><th scope="col">Selected</th><th scope="col">Observed subscriptions</th><th scope="col">Expected random</th><th scope="col">Precision</th><th scope="col">Recall</th></tr>
+              </thead>
+              <tbody>
+                  <tr><th scope="row">10%</th><td>904</td><td>450</td><td>286</td><td>49.78%</td><td>15.76%</td></tr>
+                  <tr><th scope="row">20%</th><td>1,808</td><td>841</td><td>571</td><td>46.52%</td><td>29.45%</td></tr>
+                  <tr><th scope="row">30%</th><td>2,712</td><td>1,199</td><td>857</td><td>44.21%</td><td>41.98%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/bank-marketing/contact-budget.svg" alt="Top-ranked holdout contact scenarios at three capacity levels, compared with expected random selection at the same budgets." loading="lazy" decoding="async">
+            <figcaption>Retrospective contact budgets use historical outcomes for each ranked group. Expected random selections use the overall holdout subscription prevalence.</figcaption>
+          </figure>
+        </section>
+
+        <section id="recommendations" aria-labelledby="bank-recommendations-title">
+          <h2 id="bank-recommendations-title">05. Recommendations and limits</h2>
+          <p>For a 20% capacity pilot, rank eligible records and cap the contact list at that budget. The retrospective 20% list captured 29.45% of recorded holdout subscriptions. A frozen score cutoff exceeded the same budget in the later cohort, so track how both call volume and score distributions change.</p>
+          <p>Before expanding outreach, compare logistic regression and random forest on a newer chronological cohort. Check the calibration and budget on that cohort, then run a randomized pilot that measures incremental subscriptions, contact costs, and opt-outs.</p>
+          <p>The data covers one historical banking institution and records clients who were already contacted. It supports ranking those observed outcomes. Estimating the incremental effect of calling would require an appropriate comparison group, such as a randomized pilot.</p>
+          <p>Job, education and financial indicators can carry disparities even with age and marital status excluded. Any pilot should check selection rates and errors by relevant groups where lawful and feasible, and use the score only for contact prioritization.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="bank-reproduce-title">
+          <h2 id="bank-reproduce-title">06. Reproduce the study</h2>
+          <p>The pipeline downloads the public UCI archive, validates the input, trains the models, and writes aggregate metrics and figures locally. The project includes its dependency versions, data dictionary, and tests.</p>
+          <pre class="bank-command"><code>cd projects/bank-marketing
+python -m pip install -r requirements.txt
+python -m src.run</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/418c94ec123de48f4336db5e5030a016662f0c0b/projects/bank-marketing">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/418c94ec123de48f4336db5e5030a016662f0c0b/projects/bank-marketing/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/418c94ec123de48f4336db5e5030a016662f0c0b/projects/bank-marketing/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
