@@ -1,0 +1,804 @@
+{
+  "features": {
+    "categorical": [
+      "job",
+      "education",
+      "default",
+      "housing",
+      "loan",
+      "poutcome"
+    ],
+    "numeric": [
+      "balance",
+      "previous",
+      "contacted_before",
+      "prior_days"
+    ]
+  },
+  "models": {
+    "dummy": {
+      "label": "Dummy (training prevalence)",
+      "test": {
+        "average_precision": 0.31582439455932765,
+        "brier": 0.28653239890750615,
+        "calibration": [
+          {
+            "count": 9043,
+            "lower": 0.0,
+            "mean_probability": 0.05039445550394456,
+            "observed_rate": 0.31582439455932765,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            6187,
+            0
+          ],
+          [
+            2856,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.5,
+        "threshold": 0.5
+      },
+      "validation": {
+        "average_precision": 0.11789427117894272,
+        "brier": 0.10855143711828737,
+        "calibration": [
+          {
+            "count": 9042,
+            "lower": 0.0,
+            "mean_probability": 0.050394455503944564,
+            "observed_rate": 0.11789427117894272,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            7976,
+            0
+          ],
+          [
+            1066,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.5,
+        "threshold": 0.5
+      }
+    },
+    "logistic_regression": {
+      "label": "Logistic regression",
+      "test": {
+        "average_precision": 0.4717016647738152,
+        "brier": 0.2784866942343731,
+        "calibration": [
+          {
+            "count": 8258,
+            "lower": 0.0,
+            "mean_probability": 0.04617272990143402,
+            "observed_rate": 0.2917171227900218,
+            "upper": 0.1
+          },
+          {
+            "count": 769,
+            "lower": 0.1,
+            "mean_probability": 0.12968127023018694,
+            "observed_rate": 0.5708712613784135,
+            "upper": 0.2
+          },
+          {
+            "count": 15,
+            "lower": 0.2,
+            "mean_probability": 0.21489306137540698,
+            "observed_rate": 0.4666666666666667,
+            "upper": 0.3
+          },
+          {
+            "count": 1,
+            "lower": 0.3,
+            "mean_probability": 0.35273470013178754,
+            "observed_rate": 1.0,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            6187,
+            0
+          ],
+          [
+            2856,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.6619587628165862,
+        "threshold": 0.5
+      },
+      "validation": {
+        "average_precision": 0.1796253799162763,
+        "brier": 0.10747113019752744,
+        "calibration": [
+          {
+            "count": 8822,
+            "lower": 0.0,
+            "mean_probability": 0.04498338202693232,
+            "observed_rate": 0.11493992291997279,
+            "upper": 0.1
+          },
+          {
+            "count": 177,
+            "lower": 0.1,
+            "mean_probability": 0.14373347201489708,
+            "observed_rate": 0.2824858757062147,
+            "upper": 0.2
+          },
+          {
+            "count": 43,
+            "lower": 0.2,
+            "mean_probability": 0.22315196677835322,
+            "observed_rate": 0.046511627906976744,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            7976,
+            0
+          ],
+          [
+            1066,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.6529927493550068,
+        "threshold": 0.5
+      }
+    },
+    "random_forest": {
+      "label": "Random forest",
+      "test": {
+        "average_precision": 0.42004802161952964,
+        "brier": 0.28248476468257805,
+        "calibration": [
+          {
+            "count": 9043,
+            "lower": 0.0,
+            "mean_probability": 0.05342538823158845,
+            "observed_rate": 0.31582439455932765,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            6187,
+            0
+          ],
+          [
+            2856,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.6310554365596247,
+        "threshold": 0.5
+      },
+      "validation": {
+        "average_precision": 0.18984442595740114,
+        "brier": 0.10735082831460113,
+        "calibration": [
+          {
+            "count": 9042,
+            "lower": 0.0,
+            "mean_probability": 0.05091481611437626,
+            "observed_rate": 0.11789427117894272,
+            "upper": 0.1
+          },
+          {
+            "count": 0,
+            "lower": 0.1,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.2
+          },
+          {
+            "count": 0,
+            "lower": 0.2,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.3
+          },
+          {
+            "count": 0,
+            "lower": 0.3,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.4
+          },
+          {
+            "count": 0,
+            "lower": 0.4,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.5
+          },
+          {
+            "count": 0,
+            "lower": 0.5,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.6
+          },
+          {
+            "count": 0,
+            "lower": 0.6,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.7
+          },
+          {
+            "count": 0,
+            "lower": 0.7,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.8
+          },
+          {
+            "count": 0,
+            "lower": 0.8,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 0.9
+          },
+          {
+            "count": 0,
+            "lower": 0.9,
+            "mean_probability": null,
+            "observed_rate": null,
+            "upper": 1.0
+          }
+        ],
+        "confusion_matrix": [
+          [
+            7976,
+            0
+          ],
+          [
+            1066,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.6369165540712194,
+        "threshold": 0.5
+      }
+    }
+  },
+  "policy": {
+    "test": {
+      "capacity_scenarios": [
+        {
+          "call_fraction": 0.09996682516863872,
+          "calls": 904,
+          "capacity": 0.1,
+          "confusion_matrix": [
+            [
+              5733,
+              454
+            ],
+            [
+              2406,
+              450
+            ]
+          ],
+          "conversions": 450,
+          "expected_random_conversions": 285.5052526816322,
+          "f1": 0.2393617021276596,
+          "lift": 1.576153138246449,
+          "precision": 0.497787610619469,
+          "recall": 0.15756302521008403,
+          "threshold": 0.07215816401094609
+        },
+        {
+          "call_fraction": 0.19993365033727745,
+          "calls": 1808,
+          "capacity": 0.2,
+          "confusion_matrix": [
+            [
+              5220,
+              967
+            ],
+            [
+              2015,
+              841
+            ]
+          ],
+          "conversions": 841,
+          "expected_random_conversions": 571.0105053632644,
+          "f1": 0.3606346483704974,
+          "lift": 1.472827543628071,
+          "precision": 0.4651548672566372,
+          "recall": 0.29446778711484595,
+          "threshold": 0.06580038659490917
+        },
+        {
+          "call_fraction": 0.2999004755059162,
+          "calls": 2712,
+          "capacity": 0.3,
+          "confusion_matrix": [
+            [
+              4674,
+              1513
+            ],
+            [
+              1657,
+              1199
+            ]
+          ],
+          "conversions": 1199,
+          "expected_random_conversions": 856.5157580448965,
+          "f1": 0.4306752873563218,
+          "lift": 1.3998574909314758,
+          "precision": 0.44210914454277284,
+          "recall": 0.41981792717086835,
+          "threshold": 0.06038460624029165
+        }
+      ],
+      "fixed_threshold": {
+        "call_fraction": 0.2749087692137565,
+        "calls": 2486,
+        "confusion_matrix": [
+          [
+            4821,
+            1366
+          ],
+          [
+            1736,
+            1120
+          ]
+        ],
+        "conversions": 1120,
+        "expected_random_conversions": 785.1394448744885,
+        "f1": 0.4193186072631973,
+        "lift": 1.4264981938068872,
+        "precision": 0.4505229283990346,
+        "recall": 0.39215686274509803,
+        "threshold": 0.06144689586363506
+      }
+    },
+    "validation": {
+      "capacity_scenarios": [
+        {
+          "call_fraction": 0.0999778809997788,
+          "calls": 904,
+          "capacity": 0.1,
+          "confusion_matrix": [
+            [
+              7286,
+              690
+            ],
+            [
+              852,
+              214
+            ]
+          ],
+          "conversions": 214,
+          "expected_random_conversions": 106.57642114576421,
+          "f1": 0.21725888324873097,
+          "lift": 2.0079488286373675,
+          "precision": 0.23672566371681417,
+          "recall": 0.20075046904315197,
+          "threshold": 0.06844427071776571
+        },
+        {
+          "call_fraction": 0.1999557619995576,
+          "calls": 1808,
+          "capacity": 0.2,
+          "confusion_matrix": [
+            [
+              6534,
+              1442
+            ],
+            [
+              700,
+              366
+            ]
+          ],
+          "conversions": 366,
+          "expected_random_conversions": 213.15284229152843,
+          "f1": 0.2546972860125261,
+          "lift": 1.7170777366384964,
+          "precision": 0.20243362831858408,
+          "recall": 0.3433395872420263,
+          "threshold": 0.06145070127506966
+        },
+        {
+          "call_fraction": 0.29993364299933645,
+          "calls": 2712,
+          "capacity": 0.3,
+          "confusion_matrix": [
+            [
+              5767,
+              2209
+            ],
+            [
+              563,
+              503
+            ]
+          ],
+          "conversions": 503,
+          "expected_random_conversions": 319.7292634372927,
+          "f1": 0.266278454208576,
+          "lift": 1.5732060137143236,
+          "precision": 0.18547197640117993,
+          "recall": 0.4718574108818011,
+          "threshold": 0.05696032316862411
+        }
+      ],
+      "fixed_threshold": {
+        "call_fraction": 0.1999557619995576,
+        "calls": 1808,
+        "confusion_matrix": [
+          [
+            6534,
+            1442
+          ],
+          [
+            700,
+            366
+          ]
+        ],
+        "conversions": 366,
+        "expected_random_conversions": 213.15284229152843,
+        "f1": 0.2546972860125261,
+        "lift": 1.7170777366384964,
+        "precision": 0.20243362831858408,
+        "recall": 0.3433395872420263,
+        "threshold": 0.06144689586363506
+      }
+    }
+  },
+  "seed": 42,
+  "selection": {
+    "comparison": ">",
+    "criterion": "validation_average_precision",
+    "model": "random_forest",
+    "threshold": 0.06144689586363506,
+    "threshold_method": "First validation score outside the ranked call budget, using a strict greater-than comparison",
+    "validation_capacity": 0.2
+  },
+  "source": {
+    "accessed_on": "2026-11-18",
+    "archive_member": "bank.zip",
+    "archive_sha256": "e0bf5f5de5b846e2f18e9d90606637267d46dfa260e0f17bb12e605db5efbeb4",
+    "csv_member": "bank-full.csv",
+    "csv_sha256": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d",
+    "dataset_id": 222,
+    "dataset_name": "UCI Bank Marketing",
+    "dataset_url": "https://archive.ics.uci.edu/dataset/222/bank+marketing",
+    "download_url": "https://archive.ics.uci.edu/static/public/222/bank+marketing.zip",
+    "license": "CC BY 4.0",
+    "rows": 45211
+  },
+  "split": {
+    "test": {
+      "n": 9043,
+      "positives": 2856,
+      "prevalence": 0.31582439455932765,
+      "start": 36168,
+      "stop": 45211
+    },
+    "train": {
+      "n": 27126,
+      "positives": 1367,
+      "prevalence": 0.05039445550394456,
+      "start": 0,
+      "stop": 27126
+    },
+    "validation": {
+      "n": 9042,
+      "positives": 1066,
+      "prevalence": 0.11789427117894272,
+      "start": 27126,
+      "stop": 36168
+    }
+  }
+}
