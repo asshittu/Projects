@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant Review Sentiment Classification | Adeshina Shittu</title>
+  <meta name="description" content="A reproducible NLP case study on classifying positive and negative Yelp review sentences with train-only TF-IDF, logistic regression, and a held-out evaluation.">
+  <meta name="theme-color" content="#f7f8f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Restaurant Review Sentiment Classification | Adeshina Shittu">
+  <meta property="og:description" content="A sentiment classification case study using the Yelp subset of UCI Sentiment Labelled Sentences, with model comparisons and error analysis.">
+  <meta property="og:url" content="https://asshittu.github.io/Projects/case-studies/restaurant-sentiment.html">
+  <link rel="canonical" href="https://asshittu.github.io/Projects/case-studies/restaurant-sentiment.html">
+  <link rel="icon" href="../assets/portfolio/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/portfolio.css">
+  <link rel="stylesheet" href="../assets/css/case-study.css">
+  <link rel="stylesheet" href="../assets/css/bank-marketing.css">
+  <script src="../assets/js/portfolio.js" defer></script>
+</head>
+<body class="case-study bank-study" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-brand" href="../index.html" aria-label="Adeshina Shittu home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Adeshina Shittu<span class="brand-period">.</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <span>Menu</span><span aria-hidden="true">☰</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="button button-primary nav-contact" href="../index.html#contact">Let’s connect <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell case-main" tabindex="-1">
+    <header class="case-intro">
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html#projects"><span aria-hidden="true">← </span>Back to projects</a>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Review sentiment</span>
+      </nav>
+      <p class="case-eyebrow">Case study / Natural language processing</p>
+      <h1>Restaurant review <em>sentiment classification.</em></h1>
+      <p class="case-lede">Can a simple text classifier separate positive and negative Yelp review sentences well enough to help prioritize human review?</p>
+      <ul class="case-tags" role="list" aria-label="Topics">
+        <li>Python</li>
+        <li>scikit-learn</li>
+        <li>TF-IDF</li>
+        <li>Text classification</li>
+      </ul>
+      <aside class="case-status" aria-label="Project status">
+        <strong>Completed study</strong>
+        <p>Measured review-sentence classification on held-out Yelp data.</p>
+      </aside>
+      <div class="button-row bank-hero-links">
+        <a class="button button-primary" href="#results">Explore evaluation</a>
+        <a class="button button-outline" href="https://github.com/asshittu/Projects/tree/0951a6ff2c3cbf3f41f789f49e5b77675db19243/projects/restaurant-sentiment">View source code <span class="arrow-up-right" aria-hidden="true"></span></a>
+      </div>
+    </header>
+
+    <div class="case-layout">
+      <nav class="case-contents" aria-label="On this page">
+        <ol role="list">
+          <li><a href="#problem">01 / Business question</a></li>
+          <li><a href="#data">02 / Dataset and split</a></li>
+          <li><a href="#workflow">03 / Modeling workflow</a></li>
+          <li><a href="#results">04 / Holdout evaluation</a></li>
+          <li><a href="#recommendations">05 / Recommendations</a></li>
+          <li><a href="#reproduce">06 / Reproduce the study</a></li>
+        </ol>
+      </nav>
+
+      <article class="case-article" aria-label="Restaurant review sentiment classification case study">
+        <section id="problem" aria-labelledby="sentiment-problem-title">
+          <h2 id="sentiment-problem-title">01. The business question</h2>
+          <p>A team reviewing restaurant feedback might use predicted sentiment to prioritize sentences for a person to read. Missed negative feedback can stay low in the queue, while positive sentences flagged as negative can take up review time.</p>
+          <p>The evaluation uses macro F1, which gives the positive and negative classes equal weight. Class-level precision, recall and example errors show where the classifier would make a review queue less reliable.</p>
+        </section>
+
+        <section id="data" aria-labelledby="sentiment-data-title">
+          <h2 id="sentiment-data-title">02. Dataset and split</h2>
+          <p>The Yelp subset contains 1,000 individual review sentences, with 500 positive and 500 negative labels before cleaning. The creators selected sentences for clear sentiment and omitted neutral examples. This study uses the Yelp text only.</p>
+          <dl class="bank-metrics" aria-label="Review sentence counts">
+            <div><dt>Positive on input</dt><dd>500</dd></div>
+            <div><dt>Negative on input</dt><dd>500</dd></div>
+            <div><dt>Unique after cleaning</dt><dd>996</dd></div>
+          </dl>
+          <p>I normalized text for duplicate detection, then removed four repeated sentence records before model fitting. The remaining sentences are split into roughly 60% training, 20% validation, and 20% holdout, stratified by label. Deduplication keeps copies of the same normalized sentence from crossing partitions.</p>
+          <p class="bank-credit">Dimitrios Kotzias (2015), Sentiment Labelled Sentences, UCI Machine Learning Repository. Accessed November 18, 2026. <a href="https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences">UCI dataset</a> · <a href="https://doi.org/10.24432/C57604">DOI 10.24432/C57604</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+          <p class="bank-credit">The source dataset accompanies Kotzias, Denil, de Freitas, and Smyth (2015). <a href="https://doi.org/10.1145/2783258.2783380">From Group to Individual Labels Using Deep Features</a></p>
+        </section>
+
+        <section id="workflow" aria-labelledby="sentiment-workflow-title">
+          <h2 id="sentiment-workflow-title">03. Modeling workflow</h2>
+          <ol class="case-steps" role="list">
+            <li>Validate labels</li>
+            <li>Deduplicate text</li>
+            <li>Split by label</li>
+            <li>Fit and compare</li>
+            <li>Review errors</li>
+          </ol>
+          <h3 class="bank-subheading">Train-only text features</h3>
+          <p>TF-IDF represents sentences using word features weighted by their frequency in a sentence and rarity across training sentences. Each vectorizer learns its vocabulary and weights from training text. Validation and holdout text use the resulting fixed transformation.</p>
+          <h3 class="bank-subheading">Compare simple models</h3>
+          <p>A dummy classifier provides a baseline. The two logistic regression models compare single words with a combination of single words and adjacent word pairs. Validation macro F1 selects the model, and the untouched holdout provides performance and error estimates.</p>
+        </section>
+
+        <section id="results" aria-labelledby="sentiment-results-title">
+          <h2 id="sentiment-results-title">04. Holdout evaluation</h2>
+          <p class="bank-callout">The validation-selected unigram classifier achieved 0.780 holdout macro F1, compared with 0.333 for the prior-only dummy. It correctly labeled 156 of 200 holdout sentences (78.0%).</p>
+          <h3 class="bank-subheading">Candidate performance</h3>
+          <p>The split had 597 training, 199 validation, and 200 holdout sentences. Unigrams had the highest validation macro F1. The unigram and bigram model had higher holdout average precision.</p>
+          <div class="bank-table-scroll" role="region" aria-labelledby="sentiment-model-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="sentiment-model-caption">Macro F1 averages the two class F1 scores. Average precision uses the positive label.</caption>
+              <thead><tr><th scope="col">Model</th><th scope="col">Validation macro F1</th><th scope="col">Holdout macro F1</th><th scope="col">Accuracy</th><th scope="col">Average precision</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Prior-only dummy</th><td>0.334</td><td>0.333</td><td>50.0%</td><td>0.500</td></tr>
+                <tr><th scope="row">TF-IDF unigrams (selected)</th><td>0.799</td><td>0.780</td><td>78.0%</td><td>0.843</td></tr>
+                <tr><th scope="row">TF-IDF unigrams + bigrams</th><td>0.794</td><td>0.755</td><td>75.5%</td><td>0.858</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/restaurant-sentiment/holdout-comparison.svg" alt="Held-out performance for the dummy baseline and both logistic regression text representations." loading="lazy" decoding="async">
+            <figcaption>The holdout compares the two TF-IDF models with the dummy baseline, using the same test sentences for all candidates.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Performance by label</h3>
+          <div class="bank-table-scroll" role="region" aria-labelledby="sentiment-class-caption" tabindex="0">
+            <table class="bank-table">
+              <caption id="sentiment-class-caption">Selected unigram classifier on the holdout.</caption>
+              <thead><tr><th scope="col">Label</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th><th scope="col">Sentences</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Negative</th><td>0.786</td><td>0.770</td><td>0.778</td><td>100</td></tr>
+                <tr><th scope="row">Positive</th><td>0.775</td><td>0.790</td><td>0.782</td><td>100</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure class="bank-figure">
+            <img src="../assets/restaurant-sentiment/class-metrics.svg" alt="Precision, recall, and F1 for the negative and positive classes on holdout." loading="lazy" decoding="async">
+            <figcaption>Each class has its own precision, recall, and F1, making it possible to assess how reliably the model captures critical feedback.</figcaption>
+          </figure>
+          <h3 class="bank-subheading">Error patterns</h3>
+          <p>The holdout produced 23 false positives and 21 false negatives. These examples show how the labels and the predictions differ on individual sentences.</p>
+          <figure class="bank-figure">
+            <img src="../assets/restaurant-sentiment/confusion-matrix.svg" alt="Confusion matrix for the validation-selected model, with actual and predicted positive and negative sentiment." loading="lazy" decoding="async">
+            <figcaption>The confusion matrix shows how often each sentiment was classified correctly and which errors would change a sentence’s place in a review queue.</figcaption>
+          </figure>
+          <ul class="case-questions">
+            <li><strong>False positive.</strong> <q>Now the burgers aren&#x27;t as good, the pizza which used to be amazing is doughy and flavorless.</q> Earlier praise appears alongside criticism of the current food.</li>
+            <li><strong>False negative.</strong> <q>There was a warm feeling with the service and I felt like their guest for a special treat.</q> The writer praises the service indirectly by describing the feeling of being a guest.</li>
+          </ul>
+          <p class="bank-credit">Review excerpts from the Yelp subset of <a href="https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences">UCI Sentiment Labelled Sentences</a> by Dimitrios Kotzias, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+        </section>
+
+        <section id="recommendations" aria-labelledby="sentiment-recommendations-title">
+          <h2 id="sentiment-recommendations-title">05. Recommendations and limits</h2>
+          <p>The selected classifier can prioritize examples for human review after evaluation on current feedback. Start with a labeled sample from the intended locations and review channels. Include neutral, mixed, and longer reviews and let staff review uncertain cases.</p>
+          <p>Track class-level recall and the cost of putting a complaint in the wrong queue. Review new error examples when the types of feedback or review sources change.</p>
+          <p>The released sample consists of short sentences selected for strongly positive or negative sentiment. A full review can mix praise with criticism, and a single sentence can depend on context or sarcasm. The holdout estimates performance on similarly curated Yelp sentences. A different platform, language, time period, or feedback channel would require its own evaluation.</p>
+          <p>A real review queue should give neutral, mixed, and unclear feedback a route to human assessment. Measure how often the system misses negative feedback and how many items the review team can reasonably inspect.</p>
+        </section>
+
+        <section id="reproduce" aria-labelledby="sentiment-reproduce-title">
+          <h2 id="sentiment-reproduce-title">06. Reproduce the study</h2>
+          <p>The pipeline downloads the UCI archive, validates and deduplicates the Yelp subset, trains the models, and exports metrics and figures. The repository includes dependency versions, dataset documentation, and tests.</p>
+          <pre class="bank-command"><code>cd projects/restaurant-sentiment
+python -m pip install -r requirements.txt
+python -m src.run</code></pre>
+          <ul class="bank-resource-links" role="list">
+            <li><a href="https://github.com/asshittu/Projects/tree/0951a6ff2c3cbf3f41f789f49e5b77675db19243/projects/restaurant-sentiment">Project code and README</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/0951a6ff2c3cbf3f41f789f49e5b77675db19243/projects/restaurant-sentiment/DATASET.md">Dataset documentation</a></li>
+            <li><a href="https://github.com/asshittu/Projects/blob/0951a6ff2c3cbf3f41f789f49e5b77675db19243/projects/restaurant-sentiment/reports/metrics.json">Machine-readable results</a></li>
+          </ul>
+        </section>
+
+        <p class="case-return"><a href="../index.html#projects"><span aria-hidden="true">← </span>Return to selected work</a></p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>© 2026 Adeshina Shittu</small>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>

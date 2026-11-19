@@ -1,0 +1,237 @@
+{
+  "models": {
+    "dummy": {
+      "label": "Dummy (training prior)",
+      "test": {
+        "accuracy": 0.5,
+        "average_precision": 0.5,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "support": 100
+          },
+          "positive": {
+            "f1": 0.6666666666666666,
+            "precision": 0.5,
+            "recall": 1.0,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            100
+          ]
+        ],
+        "macro_f1": 0.3333333333333333
+      },
+      "validation": {
+        "accuracy": 0.5025125628140703,
+        "average_precision": 0.5025125628140703,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "support": 99
+          },
+          "positive": {
+            "f1": 0.6688963210702341,
+            "precision": 0.5025125628140703,
+            "recall": 1.0,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            99
+          ],
+          [
+            0,
+            100
+          ]
+        ],
+        "macro_f1": 0.33444816053511706
+      }
+    },
+    "tfidf_unigram": {
+      "label": "TF-IDF unigram + logistic regression",
+      "test": {
+        "accuracy": 0.78,
+        "average_precision": 0.8433685551538522,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.7777777777777778,
+            "precision": 0.7857142857142857,
+            "recall": 0.77,
+            "support": 100
+          },
+          "positive": {
+            "f1": 0.7821782178217822,
+            "precision": 0.7745098039215687,
+            "recall": 0.79,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            77,
+            23
+          ],
+          [
+            21,
+            79
+          ]
+        ],
+        "macro_f1": 0.77997799779978
+      },
+      "validation": {
+        "accuracy": 0.7989949748743719,
+        "average_precision": 0.8910004478515405,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.801980198019802,
+            "precision": 0.7864077669902912,
+            "recall": 0.8181818181818182,
+            "support": 99
+          },
+          "positive": {
+            "f1": 0.7959183673469388,
+            "precision": 0.8125,
+            "recall": 0.78,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            81,
+            18
+          ],
+          [
+            22,
+            78
+          ]
+        ],
+        "macro_f1": 0.7989492826833704
+      }
+    },
+    "tfidf_unigram_bigram": {
+      "label": "TF-IDF unigram and bigram + logistic regression",
+      "test": {
+        "accuracy": 0.755,
+        "average_precision": 0.8581985363607078,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.7461139896373057,
+            "precision": 0.7741935483870968,
+            "recall": 0.72,
+            "support": 100
+          },
+          "positive": {
+            "f1": 0.7632850241545893,
+            "precision": 0.7383177570093458,
+            "recall": 0.79,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            72,
+            28
+          ],
+          [
+            21,
+            79
+          ]
+        ],
+        "macro_f1": 0.7546995068959474
+      },
+      "validation": {
+        "accuracy": 0.7939698492462312,
+        "average_precision": 0.8882120928948596,
+        "class_metrics": {
+          "negative": {
+            "f1": 0.7939698492462312,
+            "precision": 0.79,
+            "recall": 0.797979797979798,
+            "support": 99
+          },
+          "positive": {
+            "f1": 0.7939698492462312,
+            "precision": 0.797979797979798,
+            "recall": 0.79,
+            "support": 100
+          }
+        },
+        "confusion_matrix": [
+          [
+            79,
+            20
+          ],
+          [
+            21,
+            79
+          ]
+        ],
+        "macro_f1": 0.7939698492462312
+      }
+    }
+  },
+  "seed": 42,
+  "selection": {
+    "criterion": "validation_macro_f1",
+    "model": "tfidf_unigram",
+    "tie_breaker": "Fixed candidate order, simplest first"
+  },
+  "source": {
+    "accessed_on": "2026-11-19",
+    "archive_sha256": "afc26626d710899948693e1a61405dce197f57ffa719fa1130d346b4cc095343",
+    "dataset_id": 331,
+    "dataset_name": "UCI Sentiment Labelled Sentences (Yelp subset)",
+    "dataset_url": "https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences",
+    "download_url": "https://archive.ics.uci.edu/static/public/331/sentiment%2Blabelled%2Bsentences.zip",
+    "duplicates_removed": 4,
+    "license": "CC BY 4.0",
+    "raw_label_counts": {
+      "0": 500,
+      "1": 500
+    },
+    "raw_rows": 1000,
+    "retained_label_counts": {
+      "0": 497,
+      "1": 499
+    },
+    "retained_rows": 996,
+    "rows": 996,
+    "source_member": "sentiment labelled sentences/yelp_labelled.txt",
+    "source_sha256": "c76468b7b5c6e56a0804d728345c5f84aa2142ddb214420f61cc9cfd4c00d2ea"
+  },
+  "split": {
+    "test": {
+      "n": 200,
+      "negative": 100,
+      "positive": 100,
+      "positive_rate": 0.5
+    },
+    "train": {
+      "n": 597,
+      "negative": 298,
+      "positive": 299,
+      "positive_rate": 0.5008375209380235
+    },
+    "validation": {
+      "n": 199,
+      "negative": 99,
+      "positive": 100,
+      "positive_rate": 0.5025125628140703
+    }
+  },
+  "split_strategy": "Seeded stratified 60/20/20 positional split after normalized text deduplication"
+}
