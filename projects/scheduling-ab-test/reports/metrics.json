@@ -1,0 +1,113 @@
+{
+  "allocation": {
+    "alpha": 0.01,
+    "chi_square": 0.2613333333333333,
+    "expected": {
+      "control": 6000.0,
+      "guided": 6000.0
+    },
+    "flagged": false,
+    "method": "Pearson chi-squared goodness-of-fit (1 df)",
+    "observed": {
+      "control": 6028,
+      "guided": 5972
+    },
+    "p_value": 0.6092056132701683
+  },
+  "analysis": "intention-to-treat by original assignment",
+  "confidence_level": 0.95,
+  "decision": {
+    "allocation_check_passed": true,
+    "passes_simulated_criteria": true,
+    "publish_lower_bound_above_threshold": true,
+    "support_upper_bound_below_tolerance": true
+  },
+  "generator": {
+    "guided_assignment_probability": 0.5,
+    "planted_rates": {
+      "publish": {
+        "control": 0.55,
+        "guided": 0.6
+      },
+      "support": {
+        "control": 0.03,
+        "guided": 0.032
+      }
+    },
+    "seed": 42,
+    "workspaces": 12000
+  },
+  "n": 12000,
+  "outcomes": {
+    "publish": {
+      "arms": {
+        "control": {
+          "events": 3372,
+          "interval": {
+            "lower": 0.5468228865533241,
+            "upper": 0.5718804986215223
+          },
+          "n": 6028,
+          "rate": 0.5593895155938952
+        },
+        "guided": {
+          "events": 3626,
+          "interval": {
+            "lower": 0.5947152442286716,
+            "upper": 0.6194805320181438
+          },
+          "n": 5972,
+          "rate": 0.6071667782987274
+        }
+      },
+      "contrast": {
+        "difference": 0.04777726270483229,
+        "interval": {
+          "lower": 0.030140217666214518,
+          "upper": 0.06537125872920843
+        },
+        "relative_lift": 0.08540964993615927
+      },
+      "test": {
+        "method": "Two-sided pooled two-proportion z-test",
+        "minimum_expected_cell_count": 2489.3286666666663,
+        "p_value": 1.1106756842779057e-07,
+        "z_statistic": 5.307617236138759
+      },
+      "threshold": 0.02
+    },
+    "support": {
+      "arms": {
+        "control": {
+          "events": 194,
+          "interval": {
+            "lower": 0.02801729341145196,
+            "upper": 0.0369448680604287
+          },
+          "n": 6028,
+          "rate": 0.032183145321831454
+        },
+        "guided": {
+          "events": 176,
+          "interval": {
+            "lower": 0.025474734336826392,
+            "upper": 0.03407193557949998
+          },
+          "n": 5972,
+          "rate": 0.029470864032150032
+        }
+      },
+      "contrast": {
+        "difference": -0.0027122812896814216,
+        "interval": {
+          "lower": -0.008928635203441601,
+          "upper": 0.003494503830092398
+        },
+        "relative_lift": -0.08427645161958562
+      },
+      "threshold": 0.01
+    }
+  },
+  "source": "synthetic",
+  "unit": "workspace"
+}
