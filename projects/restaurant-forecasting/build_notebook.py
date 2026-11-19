@@ -22,31 +22,27 @@ def cell(kind, identifier, source):
 intro = """
 # Restaurant Visitor Forecasting
 
-Use this notebook in a private Kaggle workspace with access under the [competition rules](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/rules). Attach the official competition data using **Add Input**, then run all cells. The final cell creates an archive with aggregate error metrics and charts. Keep the competition data and notebook run private.
+Use this notebook in a private Kaggle workspace with access under the [competition rules](https://www.kaggle.com/competitions/recruit-restaurant-visitor-forecasting/rules). Attach the official competition data using **Add Input**, then run all cells. The loader can read the supplied ZIP files directly. The final cell creates an archive with aggregate error metrics and charts. Keep the competition data and notebook run private.
 """
 
 run = '''
 import os
 
-# Optional local overrides support an extracted copy in an eligible workspace.
+# Optional local overrides accept a directory or ZIP in an eligible workspace.
 input_override = os.getenv("RESTAURANT_FORECAST_INPUT_DIR")
 output_override = os.getenv("RESTAURANT_FORECAST_OUTPUT_DIR")
-if input_override:
-    input_root = Path(input_override)
-else:
-    input_root = Path("/kaggle/input")
+input_root = Path(input_override or "/kaggle/input")
 
 try:
-    competition_directory = find_competition_directory(input_root)
+    visits, calendar, reservations, horizon_days = load_competition_data(input_root)
 except FileNotFoundError:
     if input_override or not Path("/kaggle/working").is_dir():
         raise
     import kagglehub
 
     downloaded = kagglehub.competition_download("recruit-restaurant-visitor-forecasting")
-    competition_directory = find_competition_directory(Path(downloaded))
+    visits, calendar, reservations, horizon_days = load_competition_data(downloaded)
 
-visits, calendar, reservations, horizon_days = load_competition_data(competition_directory)
 forecast_results = evaluate_forecasts(visits, calendar, reservations, horizon_days=horizon_days)
 output_directory = Path(output_override or "/kaggle/working")
 results_archive = write_report(forecast_results, output_directory)

@@ -9,6 +9,8 @@ This notebook uses the official Kaggle competition files inside an eligible acco
 | `air_reserve.csv` | `air_store_id`, `visit_datetime`, `reserve_datetime`, `reserve_visitors` | Count AIR bookings and booked visitors by store and target date, using bookings recorded by the forecast origin |
 | `sample_submission.csv` | Date suffix in `id` | Infer the length of the daily horizon |
 
+The loader accepts these CSVs as loose files, individually zipped files, or members of a competition ZIP. It reads only the required inputs inside the private run.
+
 Use the source timestamps as supplied. At each origin, history ends at the end of that date and reservations must be recorded before the next midnight. Historical training examples replay earlier forecast origins and use only targets observed by the current training cutoff. The holdout scores cover historical observed AIR store-days. Days without a recorded count are outside the evaluation.
 
 The sample file supplies the horizon for the backtest. The notebook publishes no competition predictions and creates only aggregate historical results. The staffing sensitivity compares modeled capacity under an illustrative 18 visitors per shift and optional 10% headroom. Staffing, sales, and cost outcomes require separate operational data.

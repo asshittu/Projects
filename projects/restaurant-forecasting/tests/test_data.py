@@ -1,8 +1,11 @@
 """Exercise the private-input contract without any competition files."""
 
 import unittest
+from io import BytesIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
+from zipfile import ZIP_DEFLATED, ZipFile
 
 import pandas as pd
 
@@ -41,6 +44,113 @@ def write_synthetic_csvs(directory: Path, overrides: dict[str, str] | None = Non
     directory.mkdir(parents=True, exist_ok=True)
     for filename, csv in (SYNTHETIC_INPUTS | (overrides or {})).items():
         (directory / filename).write_text(csv, encoding="utf-8")
+
+
+def synthetic_zip(entries: dict[str, bytes | str]) -> bytes:
+    buffer = BytesIO()
+    with ZipFile(buffer, mode="w", compression=ZIP_DEFLATED) as archive:
+        for name, content in entries.items():
+            archive.writestr(name, content)
+    return buffer.getvalue()
+
+
+class CompressedInputsTest(unittest.TestCase):
+    def assert_loads_fixture(self, input_path: Path) -> None:
+        visits, calendar, reservations, horizon = load_competition_data(input_path)
+        self.assertEqual(visits["visitors"].tolist(), [10, 0, 8])
+        self.assertEqual(calendar["holiday_flg"].tolist(), [1, 0, 0, 0])
+        self.assertEqual(reservations["reserve_visitors"].tolist(), [2, 2])
+        self.assertEqual(horizon, 2)
+
+    def test_loads_individual_csv_zip_files_under_input_root(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            data = root / "competition" / "download"
+            data.mkdir(parents=True)
+            for name, csv in SYNTHETIC_INPUTS.items():
+                (data / f"{name}.zip").write_bytes(synthetic_zip({f"nested/{name}": csv}))
+            self.assert_loads_fixture(root)
+            self.assertEqual(len(list(data.iterdir())), 4)
+
+    def test_loads_an_outer_zip_with_csvs(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "competition.zip"
+            path.write_bytes(synthetic_zip({f"nested/{name}": csv for name, csv in SYNTHETIC_INPUTS.items()}))
+            self.assert_loads_fixture(path)
+            self.assert_loads_fixture(root)
+            self.assertEqual(list(root.iterdir()), [path])
+
+    def test_loads_outer_zip_with_nested_csv_zip_files(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "competition.zip"
+            entries = {
+                f"packed/{name}.zip": synthetic_zip({f"nested/{name}": csv})
+                for name, csv in SYNTHETIC_INPUTS.items()
+            }
+            path.write_bytes(synthetic_zip(entries))
+            self.assert_loads_fixture(path)
+            self.assertEqual(list(root.iterdir()), [path])
+
+    def test_loads_unique_mix_of_loose_csvs_and_zip_members(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            names = list(SYNTHETIC_INPUTS)
+            (root / names[0]).write_text(SYNTHETIC_INPUTS[names[0]], encoding="utf-8")
+            (root / f"{names[1]}.zip").write_bytes(synthetic_zip({names[1]: SYNTHETIC_INPUTS[names[1]]}))
+            (root / "mixed.zip").write_bytes(synthetic_zip({
+                f"mix/{names[2]}": SYNTHETIC_INPUTS[names[2]],
+                f"mix/{names[3]}.zip": synthetic_zip({names[3]: SYNTHETIC_INPUTS[names[3]]}),
+            }))
+            self.assert_loads_fixture(root)
+
+    def test_reports_missing_files_and_rejects_similar_basenames(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "competition.zip"
+            with self.assertRaisesRegex(FileNotFoundError, "Missing required files") as empty:
+                load_competition_data(root)
+            path.write_bytes(synthetic_zip({
+                f"wrong_{name}": csv for name, csv in SYNTHETIC_INPUTS.items()
+            }))
+            with self.assertRaisesRegex(FileNotFoundError, "Missing required files") as raised:
+                load_competition_data(path)
+            for name in SYNTHETIC_INPUTS:
+                self.assertIn(name, str(empty.exception))
+                self.assertIn(name, str(raised.exception))
+
+    def test_rejects_multiple_exact_basenames_in_zip_members(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "competition.zip"
+            name = "air_visit_data.csv"
+            path.write_bytes(synthetic_zip(SYNTHETIC_INPUTS | {f"duplicated/{name}": SYNTHETIC_INPUTS[name]}))
+            with self.assertRaisesRegex(ValueError, r"Multiple copies found for air_visit_data\.csv"):
+                load_competition_data(path)
+
+    def test_rejects_duplicate_inputs_across_loose_and_zip_sources(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_synthetic_csvs(root)
+            name = "air_visit_data.csv"
+            (root / f"{name}.zip").write_bytes(synthetic_zip({name: SYNTHETIC_INPUTS[name]}))
+            with self.assertRaisesRegex(ValueError, r"Multiple copies found for air_visit_data\.csv"):
+                load_competition_data(root)
+
+    def test_rejects_oversized_zipped_csv_and_broken_inner_zip(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "competition.zip"
+            path.write_bytes(synthetic_zip(SYNTHETIC_INPUTS))
+            with (
+                patch("src.data.MAX_CSV_BYTES", 20),
+                self.assertRaisesRegex(ValueError, "exceeds the supported read size"),
+            ):
+                load_competition_data(path)
+            path.write_bytes(synthetic_zip({"air_visit_data.csv.zip": b"not a ZIP"}))
+            with self.assertRaisesRegex(ValueError, r"readable nested ZIP input for air_visit_data\.csv"):
+                load_competition_data(path)
 
 
 class LoadCompetitionDataTest(unittest.TestCase):
