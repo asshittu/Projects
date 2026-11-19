@@ -1,0 +1,67 @@
+{
+  "customer_cutoff": "2011-12-01",
+  "exact_repeated_source_rows_after_first": 5268,
+  "quality": [
+    {
+      "anonymous_line_count": 196,
+      "classification": "credit",
+      "line_count": 8833,
+      "signed_gbp": -490663.71
+    },
+    {
+      "anonymous_line_count": 232,
+      "classification": "noncommercial_adjustment",
+      "line_count": 802,
+      "signed_gbp": -325108.879
+    },
+    {
+      "anonymous_line_count": 132177,
+      "classification": "sale",
+      "line_count": 529765,
+      "signed_gbp": 10563520.523
+    },
+    {
+      "anonymous_line_count": 2475,
+      "classification": "zero_quantity_or_price",
+      "line_count": 2509,
+      "signed_gbp": 0.0
+    }
+  ],
+  "source": {
+    "accessed_on": "2026-11-19",
+    "archive_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+    "dataset_id": 352,
+    "dataset_name": "UCI Online Retail",
+    "dataset_url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+    "download_url": "https://archive.ics.uci.edu/static/public/352/online%2Bretail.zip",
+    "license": "CC BY 4.0",
+    "rows": 541909,
+    "workbook_member": "Online Retail.xlsx",
+    "workbook_sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+    "workbook_sheet": "Online Retail"
+  },
+  "summary": {
+    "anonymous_credit_lines": 196,
+    "anonymous_credits_gbp": 5116.66,
+    "anonymous_gross_gbp": 1706057.55,
+    "anonymous_lines": 135080,
+    "anonymous_net_gbp": 1700940.89,
+    "anonymous_sale_lines": 132177,
+    "credit_lines": 8833,
+    "credits_gbp": 490663.71,
+    "cutoff": "2011-12-01T00:00:00.000",
+    "excluded_lines": 3311,
+    "gross_gbp": 10563520.523,
+    "minimum_repeat_invoices": 2,
+    "monetary_median_gbp": 642.81,
+    "net_gbp": 10072856.813,
+    "paid_invoices": 19852,
+    "recency_max_days": 30,
+    "rfm_customers": 4293,
+    "rfm_observed_net_gbp": 8032248.223,
+    "sale_lines": 529765,
+    "source_first_date": "2010-12-01T00:00:00.000",
+    "source_last_date": "2011-12-09T00:00:00.000",
+    "source_rows": 541909
+  }
+}

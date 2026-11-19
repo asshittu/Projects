@@ -1,0 +1,5 @@
+segment,customer_count,customer_share,median_recency_days,median_frequency,observed_net_gbp,median_observed_net_gbp
+Recent high-value repeat,1130,0.2632191940368041,11.0,6.0,5539150.0010,2043.16500
+Other recent,531,0.12368972746331237,15.0,1.0,200940.8600,344.00000
+Earlier repeat,1358,0.3163289075238761,78.0,3.0,1837020.4810,849.44000
+Earlier single-invoice,1274,0.29676217097600743,174.0,1.0,455136.8810,254.77500
